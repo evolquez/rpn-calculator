@@ -11,7 +11,7 @@
         android:id="@+id/panel"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:padding="10dp"
+        android:padding="5dp"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -24,6 +24,8 @@
             android:layout_gravity="bottom|right"
             android:background="@android:color/white"
             android:gravity="bottom|right"
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp"
             android:text="25.000000"
             android:textColor="@android:color/black"
             android:textSize="24sp"
@@ -31,17 +33,125 @@
     </FrameLayout>
 
     <GridLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="8dp"
-        app:layout_constraintTop_toBottomOf="@id/panel"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:columnCount="5"
-        android:layout_gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/panel"
+        app:layout_constraintVertical_bias="0.0">
+
+        <!-- Col 0 -->
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="0"
+            android:text="SET" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="0"
+            android:text="DEL" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="0"
+            android:layout_gravity="fill"
+            android:layout_rowSpan="2"
+            android:text="Enter" />
+
+        <!-- Col 1 -->
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="1"
+            android:layout_row="0"
+            android:text="7" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="1"
+            android:text="4" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="1"
+            android:text="1" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="1"
+            android:text="0" />
+
+        <!-- Col 2 -->
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="2"
+            android:layout_row="0"
+            android:text="8" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="2"
+            android:text="5" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="2"
+            android:text="2" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="2"
+            android:text="." />
+
+        <!-- Col 3 -->
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="3"
+            android:layout_row="0"
+            android:text="9" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="3"
+            android:text="6" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="3"
+            android:text="3" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="3"
+            android:text="+-" />
+
+
+        <!-- Col 4 -->
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="4"
+            android:layout_row="0"
+            android:text="/" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="4"
+            android:text="X" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="4"
+            android:text="-" />
+
+        <Button
+            style="@style/btnNumbers"
+            android:layout_column="4"
+            android:text="+" />
 
     </GridLayout>
 </android.support.constraint.ConstraintLayout>
