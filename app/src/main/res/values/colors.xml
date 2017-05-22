@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#272822</color>
     <color name="colorAccent">#272822</color>
     <color name="bgCalc">#272822</color>
+    <color name="buttonBg">#434343</color>
+    <color name="buttonBgControls">#636363</color>
 </resources>
