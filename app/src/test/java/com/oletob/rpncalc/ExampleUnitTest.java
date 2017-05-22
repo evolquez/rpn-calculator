@@ -1,4 +1,4 @@
-package com.oletob.calculadorarpn;
+package com.oletob.rpncalc;
 
 import org.junit.Test;
 

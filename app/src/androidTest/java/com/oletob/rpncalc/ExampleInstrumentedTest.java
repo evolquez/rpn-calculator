@@ -1,4 +1,4 @@
-package com.oletob.calculadorarpn;
+package com.oletob.rpncalc;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
