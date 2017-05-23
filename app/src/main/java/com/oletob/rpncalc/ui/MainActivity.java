@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.oletob.rpncalc.R;
+import com.oletob.rpncalc.model.Rpn;
 
 import java.util.ArrayList;
 
@@ -17,8 +18,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView panelTextView;
     private String[] strSplitted;
     private Button btnClicked;
-    private Character lastChar;
-    private Character firstChar;
+
+    private Rpn rpn = new Rpn();
 
     //private String numberEntered;
     private ArrayList<Double> numberStack;
@@ -46,28 +47,27 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View v) {
+        // Split the content of the panelTextView into an string array
+        this.strSplitted = this.panelTextView.getText().toString().split("\n");
+
         switch(v.getId()){
             case R.id.btnClear:
                 this.numberStack.clear();
                 panelTextView.setText("0");
                 break;
             case R.id.btnDelete:
+
                 // Remove the last number entered
+                String newInput = this.rpn.delete(this.panelTextView.getText().toString());
+                if(newInput.length() == 0){
+                    newInput = "0";
+                }
+                this.panelTextView.setText(newInput);
 
                 break;
             case R.id.btnEnter:
 
-                this.strSplitted = this.panelTextView.getText().toString().split("\n");
-
-                /* Get last char of last input, this is to ensure that the
-                   input doesn't end with a dot*/
-                this.lastChar   = this.strSplitted[this.strSplitted.length - 1].substring(this.strSplitted[this.strSplitted.length - 1].length() - 1).charAt(0);
-
-                // Add a zero by default if user doesn't complete the input
-                if(this.lastChar == '.'){
-                    this.panelTextView.append("0");
-                }
-
+                this.panelTextView.setText(this.rpn.formatInput(this.strSplitted)); //Format input
                 this.panelTextView.append("\n0"); // Append new line with a default zero in the text view
 
                 break;
@@ -95,25 +95,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     this.panelTextView.setText(this.btnClicked.getText());
                 }else{
 
-                    // Split the content of the panelTextView into an string array
-                    this.strSplitted = this.panelTextView.getText().toString().split("\n");
-
                     // Avoid insert more than one zero per input
                     if(v.getId() == R.id.btnDot && !this.strSplitted[this.strSplitted.length - 1].contains(".")){
                         this.panelTextView.append(".");
                     }else if(v.getId() != R.id.btnDot){
 
-                        // Get first char of last input
-                        this.firstChar = this.strSplitted[this.strSplitted.length - 1].substring(0, 1).charAt(0);
-
-                        // If the first char is a zero and the second one is not a dot, so I remove the leading zero
-                        if(this.firstChar == '0' && !this.strSplitted[this.strSplitted.length - 1].contains(".")){
-                            String inputClean = this.panelTextView.getText().toString().substring(0, this.panelTextView.getText().toString().length() - 1);
-                            this.panelTextView.setText(inputClean);
-                        }
-
                         this.panelTextView.append(this.btnClicked.getText()); // Append input to textview
                     }
+                }
+
+                break;
+            case R.id.btnSymbol:
+
+                String input = this.rpn.changeInputSymbol(this.strSplitted);
+                if(input.length() > 0){
+                    this.panelTextView.setText(input);
                 }
 
                 break;
