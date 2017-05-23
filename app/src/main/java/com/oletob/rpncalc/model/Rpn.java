@@ -1,5 +1,7 @@
 package com.oletob.rpncalc.model;
 
+import java.util.Arrays;
+
 /**
  * This class includes some methods to support the logic of the RPN calc.
  * @author Algenis Eduardo Volquez <evolquez@gmail.com>
@@ -8,7 +10,9 @@ package com.oletob.rpncalc.model;
  */
 public final class Rpn {
 
-    public Rpn(){}
+    public Rpn(){
+
+    }
 
     /**
      * Format the input on calculator
@@ -64,5 +68,46 @@ public final class Rpn {
         input = input.substring(0, input.length() - 1);
 
         return input;
+    }
+
+    /**
+     * Proccess the operation taken, then return the formatted text for the input text view
+     * @param input
+     * @param operatorSymbol
+     * @return String
+     * */
+    public String proccess(String[] input, String operatorSymbol){
+
+        // First, format the input
+        input = this.formatInput(input).split("\n");
+
+        if(input.length > 1){
+
+            double num1 = Double.parseDouble(input[input.length - 2]);
+            double num2 = Double.parseDouble(input[input.length - 1]);
+            double rs   = 0;
+
+            switch (operatorSymbol){
+                case "/":
+                    rs = ((num1) / (num2));
+                    break;
+                case "X":
+                    rs = ((num1) * (num2));
+                    break;
+                case "-":
+                    rs = ((num1) - (num2));
+                    break;
+                case "+":
+                    rs = ((num1) + (num2));
+                    break;
+            }
+            rs = Math.round(rs);
+
+            // Add the result
+            input = Arrays.copyOf(input, (input.length - 1));
+            input[input.length - 1] = String.valueOf(rs);
+        }
+
+        return this.formatInput(input);
     }
 }

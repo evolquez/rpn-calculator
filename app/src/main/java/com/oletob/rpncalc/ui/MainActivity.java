@@ -10,8 +10,6 @@ import android.widget.TextView;
 import com.oletob.rpncalc.R;
 import com.oletob.rpncalc.model.Rpn;
 
-import java.util.ArrayList;
-
 public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     // Member variables
@@ -20,9 +18,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button btnClicked;
 
     private Rpn rpn = new Rpn();
-
-    //private String numberEntered;
-    private ArrayList<Double> numberStack;
 
     private int [] calcButtons  = {
             R.id.btn0, R.id.btn1, R.id.btn2, R.id.btn3, R.id.btn4, R.id.btn5, R.id.btn6, R.id.btn7,
@@ -37,8 +32,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         panelTextView = (TextView)findViewById(R.id.panelTextView);
 
-        numberStack = new ArrayList<>();
-
         // Set reset buttons click event
         for(int id : this.calcButtons){
             findViewById(id).setOnClickListener(this);
@@ -52,13 +45,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         switch(v.getId()){
             case R.id.btnClear:
-                this.numberStack.clear();
                 panelTextView.setText("0");
                 break;
             case R.id.btnDelete:
 
                 // Remove the last number entered
                 String newInput = this.rpn.delete(this.panelTextView.getText().toString());
+
                 if(newInput.length() == 0){
                     newInput = "0";
                 }
@@ -106,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 break;
             case R.id.btnSymbol:
+                // Change symbol of last input
 
                 String input = this.rpn.changeInputSymbol(this.strSplitted);
                 if(input.length() > 0){
@@ -118,6 +112,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnMultiply:
             case R.id.btnSubtract:
                 // Handler operator buttons
+                this.btnClicked = (Button) v;
+                if(this.strSplitted.length > 1){
+                    this.panelTextView.setText(this.rpn.proccess(this.strSplitted, this.btnClicked.getText().toString()));
+                }
 
                 break;
 
