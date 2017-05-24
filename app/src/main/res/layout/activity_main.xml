@@ -64,7 +64,7 @@
             android:layout_gravity="fill"
             android:layout_rowSpan="2"
             android:background="@color/buttonBgControls"
-            android:text="E\nn\nt\ne\nr" />
+            android:text="ENTR" />
 
         <Button
             android:id="@+id/btn7"
