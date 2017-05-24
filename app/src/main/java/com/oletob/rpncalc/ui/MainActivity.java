@@ -16,6 +16,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView panelTextView;
     private String[] strSplitted;
     private Button btnClicked;
+    private boolean enterClicked = false;
 
     private Rpn rpn = new Rpn();
 
@@ -87,7 +88,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         Double.parseDouble(this.panelTextView.getText().toString()) == 0 && v.getId() != R.id.btnDot){
                     this.panelTextView.setText(this.btnClicked.getText());
                 }else{
-
+                    if(this.enterClicked){
+                        this.panelTextView.append("\n");
+                        this.enterClicked =  false;
+                    }
                     // Avoid insert more than one zero per input
                     if(v.getId() == R.id.btnDot && !this.strSplitted[this.strSplitted.length - 1].contains(".")){
                         this.panelTextView.append(".");
@@ -114,6 +118,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 // Handler operator buttons
                 this.btnClicked = (Button) v;
                 if(this.strSplitted.length > 1){
+                    this.enterClicked = true;
                     this.panelTextView.setText(this.rpn.proccess(this.strSplitted, this.btnClicked.getText().toString()));
                 }
 
