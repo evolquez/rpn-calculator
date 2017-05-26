@@ -147,14 +147,14 @@
             android:layout_column="4"
             android:layout_row="0"
             android:background="@color/buttonBgControls"
-            android:text="/" />
+            android:text="\u00F7"/>
 
         <Button
             android:id="@+id/btnMultiply"
             style="@style/btnNumbers"
             android:layout_column="4"
             android:background="@color/buttonBgControls"
-            android:text="X" />
+            android:text="\u00D7" />
 
         <Button
             android:id="@+id/btnSubtract"

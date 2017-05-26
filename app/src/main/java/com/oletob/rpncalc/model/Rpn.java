@@ -1,9 +1,8 @@
 package com.oletob.rpncalc.model;
 
 import android.content.SharedPreferences;
-
-import com.oletob.rpncalc.ui.MainActivity;
-
+import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
@@ -16,7 +15,7 @@ public final class Rpn {
 
     public static final String KEY = "RPN_HISTORY";
     private String lastOperation;
-    private String[] symbols = {"/", "X", "-", "+"};
+    private String[] symbols = {"/", "x", "-", "+"};
     private int symbolPosition = -1;
 
     public Rpn(){
@@ -98,11 +97,11 @@ public final class Rpn {
             double rs   = 0;
 
             switch (operatorSymbol){
-                case "/":
+                case "\u00F7":
                     rs = ((num1) / (num2));
                     this.symbolPosition = 0;
                     break;
-                case "X":
+                case "\u00D7":
                     rs = ((num1) * (num2));
                     this.symbolPosition = 1;
                     break;
@@ -115,10 +114,9 @@ public final class Rpn {
                     this.symbolPosition = 3;
                     break;
             }
-            rs = Math.round(rs);
 
             // Prepare string to history format
-            this.lastOperation = String.valueOf(num1)+this.symbols[this.symbolPosition]+String.valueOf(num2)+":"+String.valueOf(rs);
+            this.lastOperation = this.applyFormat(num1)+this.symbols[this.symbolPosition]+this.applyFormat(num2)+":"+this.applyFormat(rs)+";";
             this.saveHistory(sharedPreferences);
 
             // Add the result
@@ -146,5 +144,43 @@ public final class Rpn {
         editor.putString(KEY, history);
 
         return editor.commit(); // Commit changes and return
+    }
+
+    /**
+     * Prepare the history to show in items on history actity
+     */
+    public static ArrayList<HistoryHolder> loadHistoryInArray(String history){
+        ArrayList<HistoryHolder> arrayHistory = new ArrayList<>();
+        if(!history.contains("NONE")){
+
+            String[] items  = history.split(";");
+            String[] operation;
+
+            for (String item : items){
+                if(item.contains(":")){
+                    operation = item.split(":");
+
+                    if(operation[0].contains("/")){
+                        operation[0] = operation[0].replace("/", "\u00F7");
+                    }else if(operation[0].contains("x")){
+                        operation[0] = operation[0].replace("x", "\u00D7");
+                    }
+
+                    arrayHistory.add(new HistoryHolder(operation[0], operation[1]));
+                }
+            }
+        }
+        return arrayHistory;
+    }
+
+    /**
+     * Format numbers to show on history
+     * @param number
+     * @return String
+     */
+    private String applyFormat(double number){
+        DecimalFormat nFormat = new DecimalFormat("#,###.#");
+
+        return nFormat.format(number);
     }
 }

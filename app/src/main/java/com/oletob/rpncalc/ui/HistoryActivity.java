@@ -4,10 +4,15 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.oletob.rpncalc.R;
+import com.oletob.rpncalc.model.HistoryAdapter;
+import com.oletob.rpncalc.model.HistoryHolder;
 import com.oletob.rpncalc.model.Rpn;
+
+import java.util.ArrayList;
 
 public class HistoryActivity extends AppCompatActivity {
 
@@ -16,8 +21,17 @@ public class HistoryActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_history);
 
+        // Set action bar title to "History"
+        getSupportActionBar().setTitle("History");
+
         SharedPreferences history = getSharedPreferences(Rpn.KEY, Context.MODE_PRIVATE);
 
-        Toast.makeText(this, history.getString(Rpn.KEY, "NONE"), Toast.LENGTH_LONG).show();
+        ArrayList<HistoryHolder> historyItems =  Rpn.loadHistoryInArray(history.getString(Rpn.KEY, "NONE"));
+
+        HistoryAdapter adapter = new HistoryAdapter(this, historyItems);
+
+        // Set the adapter to the listView
+        ((ListView) findViewById(R.id.listHistory)).setAdapter(adapter);
+
     }
 }
