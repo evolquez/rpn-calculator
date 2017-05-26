@@ -1,5 +1,9 @@
 package com.oletob.rpncalc.model;
 
+import android.content.SharedPreferences;
+
+import com.oletob.rpncalc.ui.MainActivity;
+
 import java.util.Arrays;
 
 /**
@@ -9,6 +13,11 @@ import java.util.Arrays;
  * @version 1.0
  */
 public final class Rpn {
+
+    public static final String KEY = "RPN_HISTORY";
+    private String lastOperation;
+    private String[] symbols = {"/", "X", "-", "+"};
+    private int symbolPosition = -1;
 
     public Rpn(){
 
@@ -74,9 +83,10 @@ public final class Rpn {
      * Proccess the operation taken, then return the formatted text for the input text view
      * @param input
      * @param operatorSymbol
+     * @param sharedPreferences
      * @return String
      * */
-    public String proccess(String[] input, String operatorSymbol){
+    public String proccess(String[] input, String operatorSymbol, SharedPreferences sharedPreferences){
 
         // First, format the input
         input = this.formatInput(input).split("\n");
@@ -90,18 +100,26 @@ public final class Rpn {
             switch (operatorSymbol){
                 case "/":
                     rs = ((num1) / (num2));
+                    this.symbolPosition = 0;
                     break;
                 case "X":
                     rs = ((num1) * (num2));
+                    this.symbolPosition = 1;
                     break;
                 case "-":
                     rs = ((num1) - (num2));
+                    this.symbolPosition = 2;
                     break;
                 case "+":
                     rs = ((num1) + (num2));
+                    this.symbolPosition = 3;
                     break;
             }
             rs = Math.round(rs);
+
+            // Prepare string to history format
+            this.lastOperation = String.valueOf(num1)+this.symbols[this.symbolPosition]+String.valueOf(num2)+":"+String.valueOf(rs);
+            this.saveHistory(sharedPreferences);
 
             // Add the result
             input = Arrays.copyOf(input, (input.length - 1));
@@ -109,5 +127,24 @@ public final class Rpn {
         }
 
         return this.formatInput(input);
+    }
+
+    /**
+     * Save the last operation to SharedPreferences
+     * @param sharedPreferences
+     * @return boolean
+     * */
+    private boolean saveHistory(SharedPreferences sharedPreferences){
+
+        // First read the data on sharedPreferences
+
+        String history = sharedPreferences.getString(KEY, "");
+        history += this.lastOperation;
+
+        // Now add new data to shared preferences
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(KEY, history);
+
+        return editor.commit(); // Commit changes and return
     }
 }

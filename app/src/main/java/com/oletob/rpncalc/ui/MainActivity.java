@@ -1,5 +1,8 @@
 package com.oletob.rpncalc.ui;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -9,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.oletob.rpncalc.R;
 import com.oletob.rpncalc.model.Rpn;
@@ -19,8 +21,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     // Member variables
     private TextView panelTextView;
     private String[] strSplitted;
+    private String input;
     private Button btnClicked;
     private boolean enterClicked = false;
+
+    private SharedPreferences historyStore;
 
     private Rpn rpn = new Rpn();
 
@@ -36,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         panelTextView = (TextView)findViewById(R.id.panelTextView);
+
+        this.historyStore = getSharedPreferences(Rpn.KEY, Context.MODE_PRIVATE);
 
         // Set reset buttons click event
         for(int id : this.calcButtons){
@@ -55,7 +62,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.btnHistory:
-                Toast.makeText(this, "Item menu clicked", Toast.LENGTH_SHORT).show();
+                Intent i = new Intent(MainActivity.this, HistoryActivity.class);
+                startActivity(i);
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -143,7 +151,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 this.btnClicked = (Button) v;
                 if(this.strSplitted.length > 1){
                     this.enterClicked = true;
-                    this.panelTextView.setText(this.rpn.proccess(this.strSplitted, this.btnClicked.getText().toString()));
+                    this.input = this.rpn.proccess(this.strSplitted, this.btnClicked.getText().toString(), this.historyStore);
+                    this.panelTextView.setText(this.input);
                 }
 
                 break;
