@@ -15,12 +15,11 @@ public final class Rpn {
 
     public static final String KEY = "RPN_HISTORY";
     private String lastOperation;
-    private String[] symbols = {"/", "x", "-", "+"};
-    private int symbolPosition = -1;
 
-    public Rpn(){
+    private String[] symbols    = {"/", "x", "-", "+"};
+    private int symbolPosition  = -1;
 
-    }
+    public Rpn(){ }
 
     /**
      * Format the input on calculator
