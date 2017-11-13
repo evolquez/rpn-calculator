@@ -11,15 +11,15 @@
         android:id="@+id/panelTextView"
         android:layout_width="0dp"
         android:layout_height="200dp"
-        android:layout_gravity="bottom|right"
+        android:layout_gravity="bottom|end"
         android:layout_marginEnd="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:background="@android:color/white"
-        android:gravity="bottom|right"
+        android:gravity="bottom|end"
         android:padding="5dp"
-        android:text="0"
+        android:text="@string/cero"
         android:textColor="@android:color/black"
         android:textSize="24sp"
         app:layout_constraintHorizontal_bias="0.0"
@@ -49,13 +49,13 @@
             android:id="@+id/btnClear"
             style="@style/btnNumbers"
             android:layout_column="0"
-            android:text="CLR" />
+            android:text="@string/clear" />
 
         <Button
             android:id="@+id/btnDelete"
             style="@style/btnNumbers"
             android:layout_column="0"
-            android:text="DEL" />
+            android:text="@string/delete" />
 
         <Button
             android:id="@+id/btnEnter"
@@ -64,82 +64,82 @@
             android:layout_gravity="fill"
             android:layout_rowSpan="2"
             android:background="@color/buttonBgControls"
-            android:text="ENTR" />
+            android:text="@string/enter" />
 
         <Button
             android:id="@+id/btn7"
             style="@style/btnNumbers"
             android:layout_column="1"
             android:layout_row="0"
-            android:text="7" />
+            android:text="@string/seven" />
 
         <Button
             android:id="@+id/btn4"
             style="@style/btnNumbers"
             android:layout_column="1"
-            android:text="4" />
+            android:text="@string/four" />
 
         <Button
             android:id="@+id/btn1"
             style="@style/btnNumbers"
             android:layout_column="1"
-            android:text="1" />
+            android:text="@string/one" />
 
         <Button
             android:id="@+id/btn0"
             style="@style/btnNumbers"
             android:layout_column="1"
-            android:text="0" />
+            android:text="@string/cero" />
 
         <Button
             android:id="@+id/btn8"
             style="@style/btnNumbers"
             android:layout_column="2"
             android:layout_row="0"
-            android:text="8" />
+            android:text="@string/eight" />
 
         <Button
             android:id="@+id/btn5"
             style="@style/btnNumbers"
             android:layout_column="2"
-            android:text="5" />
+            android:text="@string/five" />
 
         <Button
             android:id="@+id/btn2"
             style="@style/btnNumbers"
             android:layout_column="2"
-            android:text="2" />
+            android:text="@string/two" />
 
         <Button
             android:id="@+id/btnDot"
             style="@style/btnNumbers"
             android:layout_column="2"
-            android:text="." />
+            android:text="@string/dot" />
 
         <Button
             android:id="@+id/btn9"
             style="@style/btnNumbers"
             android:layout_column="3"
             android:layout_row="0"
-            android:text="9" />
+            android:text="@string/nine" />
 
         <Button
             android:id="@+id/btn6"
             style="@style/btnNumbers"
             android:layout_column="3"
-            android:text="6" />
+            android:text="@string/six" />
 
         <Button
             android:id="@+id/btn3"
             style="@style/btnNumbers"
             android:layout_column="3"
-            android:text="3" />
+            android:text="@string/three" />
 
         <Button
             android:id="@+id/btnSymbol"
             style="@style/btnNumbers"
             android:layout_column="3"
-            android:text="+-" />
+            android:text="@string/plus_minus_symbol" />
 
         <Button
             android:id="@+id/btnDevide"
@@ -147,28 +147,28 @@
             android:layout_column="4"
             android:layout_row="0"
             android:background="@color/buttonBgControls"
-            android:text="\u00F7"/>
+            android:text="@string/devide_symbol" />
 
         <Button
             android:id="@+id/btnMultiply"
             style="@style/btnNumbers"
             android:layout_column="4"
             android:background="@color/buttonBgControls"
-            android:text="\u00D7" />
+            android:text="@string/multiply_symbol" />
 
         <Button
             android:id="@+id/btnSubtract"
             style="@style/btnNumbers"
             android:layout_column="4"
             android:background="@color/buttonBgControls"
-            android:text="-" />
+            android:text="@string/substract_symbol" />
 
         <Button
             android:id="@+id/btnSum"
             style="@style/btnNumbers"
             android:layout_column="4"
             android:background="@color/buttonBgControls"
-            android:text="+" />
+            android:text="@string/sum_symbol" />
 
     </GridLayout>
 </android.support.constraint.ConstraintLayout>

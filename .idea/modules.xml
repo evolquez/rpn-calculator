@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/CalculadoraRPN.iml" filepath="$PROJECT_DIR$/CalculadoraRPN.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/rpn-calculator.iml" filepath="$PROJECT_DIR$/rpn-calculator.iml" />
     </modules>
   </component>
 </project>
