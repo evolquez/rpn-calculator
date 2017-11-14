@@ -22,4 +22,8 @@
     <string name="sum_symbol">+</string>
     <string name="history">History</string>
     <string name="history_empty">History empty</string>
+    <string name="clear_history_message">Are you sure you want to clear the whole history?</string>
+    <string name="yes">Yes</string>
+    <string name="alert_dialog_ok">OK</string>
+    <string name="alert_dialog_cancel">Cancel</string>
 </resources>

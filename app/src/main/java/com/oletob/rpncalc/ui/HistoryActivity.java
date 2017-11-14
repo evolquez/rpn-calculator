@@ -43,19 +43,27 @@ public class HistoryActivity extends AppCompatActivity {
     }
 
 
+    public void clearHistory(){
+        SharedPreferences.Editor editor = this.history.edit();
+        editor.clear();
+
+        if(editor.commit()){
+
+            this.loadHistory();
+            Toast.makeText(this, "History cleared!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case R.id.btnClear:
-                SharedPreferences.Editor editor = this.history.edit();
-                editor.clear();
+                AlertDialogFragment alert = new AlertDialogFragment();
 
-                if(editor.commit()){
+                alert.show(getFragmentManager(), "");
 
-                    this.loadHistory();
-                    Toast.makeText(this, "History cleared!", Toast.LENGTH_SHORT).show();
-                }
+
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
