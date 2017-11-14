@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">RPN Calc</string>
     <string name="cero">0</string>
-    <string name="clear">CLR</string>
+    <string name="clear_btn">CLR</string>
+    <string name="clear">Clear</string>
     <string name="delete">DEL</string>
     <string name="enter">ENTR</string>
     <string name="seven">7</string>
@@ -19,4 +20,6 @@
     <string name="multiply_symbol">×</string>
     <string name="substract_symbol">-</string>
     <string name="sum_symbol">+</string>
+    <string name="history">History</string>
+    <string name="history_empty">History empty</string>
 </resources>

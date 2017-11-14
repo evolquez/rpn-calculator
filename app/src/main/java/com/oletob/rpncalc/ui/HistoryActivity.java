@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,6 +21,8 @@ import java.util.ArrayList;
 
 public class HistoryActivity extends AppCompatActivity {
     private SharedPreferences history;
+    private int totalHistory = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +42,8 @@ public class HistoryActivity extends AppCompatActivity {
         return true;
     }
 
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
@@ -47,6 +52,7 @@ public class HistoryActivity extends AppCompatActivity {
                 editor.clear();
 
                 if(editor.commit()){
+
                     this.loadHistory();
                     Toast.makeText(this, "History cleared!", Toast.LENGTH_SHORT).show();
                 }
@@ -56,14 +62,38 @@ public class HistoryActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+
+        if(totalHistory == 0){
+            MenuItem itemClear = menu.findItem(R.id.btnClear);
+            itemClear.setEnabled(false);
+        }
+
+        return super.onPrepareOptionsMenu(menu);
+    }
+
     private void loadHistory(){
         history = getSharedPreferences(Rpn.KEY, Context.MODE_PRIVATE);
 
-        ArrayList<HistoryHolder> historyItems =  Rpn.loadHistoryInArray(history.getString(Rpn.KEY, "NONE"));
+        ArrayList<HistoryHolder> historyItems = Rpn.loadHistoryInArray(history.getString(Rpn.KEY, "NONE"));
+        totalHistory = historyItems.size();
 
-        HistoryAdapter adapter = new HistoryAdapter(this, historyItems);
+        if(totalHistory == 0){
+            invalidateOptionsMenu();
 
-        // Set the adapter to the listView
-        ((ListView) findViewById(R.id.listHistory)).setAdapter(adapter);
+            findViewById(R.id.historyEmptyTextView).setVisibility(View.VISIBLE);
+            findViewById(R.id.listHistory).setVisibility(View.GONE);
+
+        }else{
+            findViewById(R.id.historyEmptyTextView).setVisibility(View.GONE);
+            findViewById(R.id.listHistory).setVisibility(View.VISIBLE);
+
+            HistoryAdapter adapter = new HistoryAdapter(this, historyItems);
+
+            // Set the adapter to the listView
+            ((ListView) findViewById(R.id.listHistory)).setAdapter(adapter);
+
+        }
     }
 }
