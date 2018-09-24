@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        panelTextView = (TextView)findViewById(R.id.panelTextView);
+        panelTextView = findViewById(R.id.panelTextView);
 
         this.historyStore = getSharedPreferences(Rpn.KEY, Context.MODE_PRIVATE);
 
