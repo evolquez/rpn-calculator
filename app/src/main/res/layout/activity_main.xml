@@ -1,10 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bgCalc"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
     tools:context="com.oletob.rpncalc.ui.MainActivity">
 
     <TextView
@@ -12,163 +15,144 @@
         android:layout_width="0dp"
         android:layout_height="200dp"
         android:layout_gravity="bottom|end"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
         android:background="@android:color/white"
         android:gravity="bottom|end"
         android:padding="5dp"
         android:text="@string/cero"
         android:textColor="@android:color/black"
         android:textSize="24sp"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="0" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
-    <GridLayout
+    <LinearLayout
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:columnCount="5"
+        android:layout_height="0dp"
         android:orientation="horizontal"
-        android:useDefaultMargins="false"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/panelTextView"
-        app:layout_constraintVertical_bias="0.0">
+        android:weightSum="5"
+        app:layout_constraintTop_toBottomOf="@+id/panelTextView">
 
-        <Button
-            android:id="@+id/btnClear"
-            style="@style/btnNumbers"
-            android:layout_column="0"
-            android:text="@string/clear_btn" />
+        <!-- Column 1 -->
+        <LinearLayout style="@style/layoutButtonGroup">
+            <Button
+                android:id="@+id/btnClear"
+                style="@style/btnNumbers"
+                android:text="@string/clear_btn" />
 
-        <Button
-            android:id="@+id/btnDelete"
-            style="@style/btnNumbers"
-            android:layout_column="0"
-            android:text="@string/delete" />
+            <Button
+                android:id="@+id/btnDelete"
+                style="@style/btnNumbers"
+                android:text="@string/delete" />
 
-        <Button
-            android:id="@+id/btnEnter"
-            style="@style/btnNumbers"
-            android:layout_column="0"
-            android:layout_gravity="fill"
-            android:layout_rowSpan="2"
-            android:background="@color/buttonBgControls"
-            android:text="@string/enter" />
+            <Button
+                android:id="@+id/btnEnter"
+                style="@style/btnNumbers"
+                android:layout_height="156dp"
+                android:background="@color/buttonBgControls"
+                android:layout_weight="2"
+                android:text="@string/enter" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btn7"
-            style="@style/btnNumbers"
-            android:layout_column="1"
-            android:layout_row="0"
-            android:text="@string/seven" />
+        <!-- Column 2 -->
+        <LinearLayout style="@style/layoutButtonGroup">
 
-        <Button
-            android:id="@+id/btn4"
-            style="@style/btnNumbers"
-            android:layout_column="1"
-            android:text="@string/four" />
+            <Button
+                android:id="@+id/btn7"
+                style="@style/btnNumbers"
+                android:text="@string/seven"/>
 
-        <Button
-            android:id="@+id/btn1"
-            style="@style/btnNumbers"
-            android:layout_column="1"
-            android:text="@string/one" />
+            <Button
+                android:id="@+id/btn4"
+                style="@style/btnNumbers"
+                android:text="@string/four"/>
 
-        <Button
-            android:id="@+id/btn0"
-            style="@style/btnNumbers"
-            android:layout_column="1"
-            android:text="@string/cero" />
+            <Button
+                android:id="@+id/btn1"
+                style="@style/btnNumbers"
+                android:text="@string/one"/>
 
-        <Button
-            android:id="@+id/btn8"
-            style="@style/btnNumbers"
-            android:layout_column="2"
-            android:layout_row="0"
-            android:text="@string/eight" />
+            <Button
+                android:id="@+id/btn0"
+                style="@style/btnNumbers"
+                android:text="@string/cero"/>
 
-        <Button
-            android:id="@+id/btn5"
-            style="@style/btnNumbers"
-            android:layout_column="2"
-            android:text="@string/five" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btn2"
-            style="@style/btnNumbers"
-            android:layout_column="2"
-            android:text="@string/two" />
+        <!-- Column 3 -->
+        <LinearLayout style="@style/layoutButtonGroup">
+            <Button
+                android:id="@+id/btn8"
+                style="@style/btnNumbers"
+                android:text="@string/eight" />
 
-        <Button
-            android:id="@+id/btnDot"
-            style="@style/btnNumbers"
-            android:layout_column="2"
-            android:text="@string/dot" />
+            <Button
+                android:id="@+id/btn5"
+                style="@style/btnNumbers"
+                android:text="@string/five" />
 
-        <Button
-            android:id="@+id/btn9"
-            style="@style/btnNumbers"
-            android:layout_column="3"
-            android:layout_row="0"
-            android:text="@string/nine" />
+            <Button
+                android:id="@+id/btn2"
+                style="@style/btnNumbers"
+                android:text="@string/two" />
 
-        <Button
-            android:id="@+id/btn6"
-            style="@style/btnNumbers"
-            android:layout_column="3"
-            android:text="@string/six" />
+            <Button
+                android:id="@+id/btnDot"
+                style="@style/btnNumbers"
+                android:text="@string/dot" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btn3"
-            style="@style/btnNumbers"
-            android:layout_column="3"
-            android:text="@string/three" />
+        <!-- Column 4 -->
+        <LinearLayout style="@style/layoutButtonGroup">
+            <Button
+                android:id="@+id/btn9"
+                style="@style/btnNumbers"
+                android:text="@string/nine" />
 
-        <Button
-            android:id="@+id/btnSymbol"
-            style="@style/btnNumbers"
-            android:layout_column="3"
-            android:text="@string/plus_minus_symbol" />
+            <Button
+                android:id="@+id/btn6"
+                style="@style/btnNumbers"
+                android:text="@string/six" />
 
-        <Button
-            android:id="@+id/btnDevide"
-            style="@style/btnNumbers"
-            android:layout_column="4"
-            android:layout_row="0"
-            android:background="@color/buttonBgControls"
-            android:text="@string/devide_symbol" />
+            <Button
+                android:id="@+id/btn3"
+                style="@style/btnNumbers"
+                android:text="@string/three" />
 
-        <Button
-            android:id="@+id/btnMultiply"
-            style="@style/btnNumbers"
-            android:layout_column="4"
-            android:background="@color/buttonBgControls"
-            android:text="@string/multiply_symbol" />
+            <Button
+                android:id="@+id/btnSymbol"
+                style="@style/btnNumbers"
+                android:text="@string/plus_minus_symbol" />
+        </LinearLayout>
 
-        <Button
-            android:id="@+id/btnSubtract"
-            style="@style/btnNumbers"
-            android:layout_column="4"
-            android:background="@color/buttonBgControls"
-            android:text="@string/substract_symbol" />
+        <!-- Column 5 -->
+        <LinearLayout style="@style/layoutButtonGroup">
+            <Button
+                android:id="@+id/btnDevide"
+                style="@style/btnNumbers"
+                android:background="@color/buttonBgControls"
+                android:text="@string/devide_symbol" />
 
-        <Button
-            android:id="@+id/btnSum"
-            style="@style/btnNumbers"
-            android:layout_column="4"
-            android:background="@color/buttonBgControls"
-            android:text="@string/sum_symbol" />
+            <Button
+                android:id="@+id/btnMultiply"
+                style="@style/btnNumbers"
+                android:background="@color/buttonBgControls"
+                android:text="@string/multiply_symbol" />
 
-    </GridLayout>
+            <Button
+                android:id="@+id/btnSubtract"
+                style="@style/btnNumbers"
+                android:background="@color/buttonBgControls"
+                android:text="@string/substract_symbol" />
+
+            <Button
+                android:id="@+id/btnSum"
+                style="@style/btnNumbers"
+                android:background="@color/buttonBgControls"
+                android:text="@string/sum_symbol" />
+        </LinearLayout>
+    </LinearLayout>
+
 </android.support.constraint.ConstraintLayout>

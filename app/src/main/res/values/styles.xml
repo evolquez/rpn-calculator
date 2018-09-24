@@ -2,18 +2,27 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="btnNumbers">
-        <item name="android:layout_width">69dp</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">78dp</item>
         <item name="android:background">@color/buttonBg</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textColor">@android:color/white</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="layoutButtonGroup">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:weightSum">4</item>
+        <item name="android:layout_weight">1</item>
     </style>
 
 </resources>
