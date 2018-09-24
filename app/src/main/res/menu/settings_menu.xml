@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/btnHistory"
-        android:icon="@drawable/ic_history_icon"
-        android:title="@string/history"
-        app:showAsAction="always" />
+        android:title="@string/history" />
+    <item
+        android:id="@+id/btnAbout"
+        android:title="@string/about"/>
 </menu>

@@ -64,6 +64,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Intent i = new Intent(MainActivity.this, HistoryActivity.class);
                 startActivity(i);
                 return true;
+            case R.id.btnAbout:
+                startActivity(new Intent(MainActivity.this, AboutActivity.class));
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
