@@ -1,4 +1,4 @@
-# prj-cursobasico-1
+# RPN Calculator
 RPN Calculator (Reverse Polish Notation)
 
 # Description
