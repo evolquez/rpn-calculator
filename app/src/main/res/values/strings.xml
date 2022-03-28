@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RPN Calc</string>
+    <!--<string name="app_name">RPN Calc</string>-->
     <string name="zero">0</string>
     <string name="clear_btn">CLR</string>
     <string name="clear">Clear</string>
@@ -27,12 +27,15 @@
     <string name="alert_dialog_ok">OK</string>
     <string name="alert_dialog_cancel">Cancel</string>
     <string name="about">About</string>
-    <string name="made_in_santo_domingo">Made with &#9829; in Santo Domingo, DR by</string>
+    <string name="made_in_santo_domingo">Made with &#9829; in Santo Domingo &#127465;&#127476; by</string>
     <string name="author_name">Algenis Volquez</string>
-    <string name="author_linkedin_profile">https://www.linkedin.com/in/evolquez/</string>
+    <string name="author_linkedin_profile">https://www.linkedin.com/in/aevolquez/</string>
     <string name="author_github_profile">https://github.com/evolquez</string>
     <string name="rpn_calculator">RPN Calculator</string>
+    <string name="rpn">RPN</string>
+    <string name="reverse_polish_notation">Reverse Polish Notation</string>
     <string name="github">Github</string>
     <string name="linkedin">Linkedin</string>
-    <string name="app_description">This RPN Calculator includes basic operations like (Add, Subtract, Multiply and Divide) in addition to showing a simple and beautiful history.</string>
+    <string name="app_description">This calculator includes basic operations like (add, subtract, multiply and divide) in addition to showing a simple, clear and beautiful history.</string>
+    <string name="version_format">Version %s (%s)</string>
 </resources>

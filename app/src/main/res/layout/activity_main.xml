@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -8,47 +8,45 @@
     android:background="@color/bgCalc"
     android:paddingLeft="8dp"
     android:paddingRight="8dp"
-    tools:context="com.oletob.rpncalc.ui.MainActivity">
+    tools:context="com.oletob.rpncalc.ui.main.MainActivity">
 
     <TextView
-        android:id="@+id/panelTextView"
-        android:layout_width="0dp"
+        android:id="@+id/text_view_panel"
+        android:layout_width="match_parent"
         android:layout_height="200dp"
+        android:layout_alignParentTop="true"
         android:layout_gravity="bottom|end"
         android:background="@android:color/white"
         android:gravity="bottom|end"
         android:padding="5dp"
         android:text="@string/zero"
         android:textColor="@android:color/black"
-        android:textSize="24sp"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:textSize="24sp" />
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         android:weightSum="5"
-        app:layout_constraintTop_toBottomOf="@+id/panelTextView">
+        android:layout_below="@+id/text_view_panel">
 
         <!-- Column 1 -->
         <LinearLayout style="@style/layoutButtonGroup">
             <Button
-                android:id="@+id/btnClear"
+                android:id="@+id/button_clear"
                 style="@style/btnNumbers"
                 android:text="@string/clear_btn" />
 
             <Button
-                android:id="@+id/btnDelete"
+                android:id="@+id/button_delete"
                 style="@style/btnNumbers"
                 android:text="@string/delete" />
 
             <Button
-                android:id="@+id/btnEnter"
+                android:id="@+id/button_enter"
                 style="@style/btnNumbers"
                 android:layout_height="156dp"
                 android:background="@color/buttonBgControls"
@@ -60,22 +58,22 @@
         <LinearLayout style="@style/layoutButtonGroup">
 
             <Button
-                android:id="@+id/btn7"
+                android:id="@+id/button_7"
                 style="@style/btnNumbers"
                 android:text="@string/seven"/>
 
             <Button
-                android:id="@+id/btn4"
+                android:id="@+id/button_4"
                 style="@style/btnNumbers"
                 android:text="@string/four"/>
 
             <Button
-                android:id="@+id/btn1"
+                android:id="@+id/button_1"
                 style="@style/btnNumbers"
                 android:text="@string/one"/>
 
             <Button
-                android:id="@+id/btn0"
+                android:id="@+id/button_0"
                 style="@style/btnNumbers"
                 android:text="@string/zero"/>
 
@@ -84,22 +82,22 @@
         <!-- Column 3 -->
         <LinearLayout style="@style/layoutButtonGroup">
             <Button
-                android:id="@+id/btn8"
+                android:id="@+id/button_8"
                 style="@style/btnNumbers"
                 android:text="@string/eight" />
 
             <Button
-                android:id="@+id/btn5"
+                android:id="@+id/button_5"
                 style="@style/btnNumbers"
                 android:text="@string/five" />
 
             <Button
-                android:id="@+id/btn2"
+                android:id="@+id/button_2"
                 style="@style/btnNumbers"
                 android:text="@string/two" />
 
             <Button
-                android:id="@+id/btnDot"
+                android:id="@+id/button_dot"
                 style="@style/btnNumbers"
                 android:text="@string/dot" />
         </LinearLayout>
@@ -107,22 +105,22 @@
         <!-- Column 4 -->
         <LinearLayout style="@style/layoutButtonGroup">
             <Button
-                android:id="@+id/btn9"
+                android:id="@+id/button_9"
                 style="@style/btnNumbers"
                 android:text="@string/nine" />
 
             <Button
-                android:id="@+id/btn6"
+                android:id="@+id/button_6"
                 style="@style/btnNumbers"
                 android:text="@string/six" />
 
             <Button
-                android:id="@+id/btn3"
+                android:id="@+id/button_3"
                 style="@style/btnNumbers"
                 android:text="@string/three" />
 
             <Button
-                android:id="@+id/btnSymbol"
+                android:id="@+id/button_symbols"
                 style="@style/btnNumbers"
                 android:text="@string/plus_minus_symbol" />
         </LinearLayout>
@@ -130,29 +128,29 @@
         <!-- Column 5 -->
         <LinearLayout style="@style/layoutButtonGroup">
             <Button
-                android:id="@+id/btnDevide"
+                android:id="@+id/button_devide"
                 style="@style/btnNumbers"
                 android:background="@color/buttonBgControls"
                 android:text="@string/devide_symbol" />
 
             <Button
-                android:id="@+id/btnMultiply"
+                android:id="@+id/button_multiply"
                 style="@style/btnNumbers"
                 android:background="@color/buttonBgControls"
                 android:text="@string/multiply_symbol" />
 
             <Button
-                android:id="@+id/btnSubtract"
+                android:id="@+id/button_subtract"
                 style="@style/btnNumbers"
                 android:background="@color/buttonBgControls"
                 android:text="@string/substract_symbol" />
 
             <Button
-                android:id="@+id/btnSum"
+                android:id="@+id/button_sum"
                 style="@style/btnNumbers"
                 android:background="@color/buttonBgControls"
                 android:text="@string/sum_symbol" />
         </LinearLayout>
     </LinearLayout>
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>
