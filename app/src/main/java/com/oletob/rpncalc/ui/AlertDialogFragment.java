@@ -20,7 +20,7 @@ public class AlertDialogFragment extends DialogFragment {
                 .setPositiveButton(R.string.alert_dialog_ok, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((HistoryActivity)getActivity()).clearHistory();
+                        //((HistoryActivity)getActivity()).clearHistory();
                     }
                 })
                 .setNegativeButton(R.string.alert_dialog_cancel, new DialogInterface.OnClickListener() {

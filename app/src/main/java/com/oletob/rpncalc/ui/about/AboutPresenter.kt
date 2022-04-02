@@ -3,7 +3,6 @@ package com.oletob.rpncalc.ui.about
 class AboutPresenter(private val view: AboutActivity): AboutContract.Presenter {
 
     override fun init() {
-        view.setActionBar()
         view.setVersion()
     }
 

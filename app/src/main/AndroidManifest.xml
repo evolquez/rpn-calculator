@@ -20,9 +20,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".ui.HistoryActivity"
-            android:parentActivityName=".ui.main.MainActivity"
-            android:screenOrientation="portrait" />
+            android:name=".ui.history.HistoryActivity"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".ui.about.AboutActivity"
             android:screenOrientation="portrait"/>

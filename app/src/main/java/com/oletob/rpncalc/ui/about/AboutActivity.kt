@@ -1,16 +1,17 @@
 package com.oletob.rpncalc.ui.about
 
+import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.oletob.rpncalc.BuildConfig
 import com.oletob.rpncalc.R
+import com.oletob.rpncalc.ui.common.BaseActivity
 
-class AboutActivity: AppCompatActivity(), AboutContract.View {
+class AboutActivity: BaseActivity(), AboutContract.View {
 
     private lateinit var versionTextView: TextView
     private lateinit var presenter: AboutContract.Presenter
@@ -21,8 +22,9 @@ class AboutActivity: AppCompatActivity(), AboutContract.View {
 
         versionTextView = findViewById(R.id.text_view_version)
 
+        setActionBar(R.string.about, true)
+
         presenter = AboutPresenter(this)
-        presenter.init()
 
         findViewById<ImageView>(R.id.image_view_linkedin).setOnClickListener{presenter.onClickLinkedIn()}
         findViewById<ImageView>(R.id.image_view_github).setOnClickListener{presenter.onClickGithub()}
@@ -32,11 +34,6 @@ class AboutActivity: AppCompatActivity(), AboutContract.View {
         if(item.itemId == android.R.id.home) onBackPressed()
 
         return super.onOptionsItemSelected(item)
-    }
-
-    override fun setActionBar() {
-        supportActionBar?.title = getString(R.string.about)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
     }
 
     override fun setVersion() {
@@ -53,5 +50,9 @@ class AboutActivity: AppCompatActivity(), AboutContract.View {
         if(resString != 0){
             startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(getString(resString))))
         }
+    }
+
+    companion object {
+        fun createIntent(context: Context) = Intent(context, AboutActivity::class.java)
     }
 }

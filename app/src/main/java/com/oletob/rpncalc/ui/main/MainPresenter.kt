@@ -1,6 +1,7 @@
 package com.oletob.rpncalc.ui.main
 
 import com.oletob.rpncalc.R
+import com.oletob.rpncalc.model.RpnModel
 
 class MainPresenter(private val view: MainActivity): MainContract.Presenter {
 
@@ -13,7 +14,7 @@ class MainPresenter(private val view: MainActivity): MainContract.Presenter {
     }
 
     override fun onClickNumber(number: Int) {
-        if(view.getPanelText().length == 1 && view.getPanelText().toInt() == 0){
+        if(view.getPanelText().length == 1 && view.getPanelText().toDouble() == 0.0){
             view.setPanelText(number.toString())
         }else{
             view.appendToPanelText(number.toString())
@@ -25,11 +26,23 @@ class MainPresenter(private val view: MainActivity): MainContract.Presenter {
     }
 
     override fun onClickEnter() {
-        TODO("Not yet implemented")
+
+        if(view.getPanelText().last().toString().toDouble() != 0.0){
+            view.setPanelText(RpnModel.formatInput(view.getPanelText()))
+        }
     }
 
     override fun onClickDelete() {
-        TODO("Not yet implemented")
+
+        val newInput = view.getPanelText().substring(0, view.getPanelText().length - 1)
+
+        if(newInput.isNotEmpty() && newInput.last() == '\n'){
+            newInput.let {
+                it.substring(0, it.length - 1)
+            }
+        }
+
+        view.setPanelText(newInput.ifEmpty { view.getString(R.string.zero) })
     }
 
     override fun onClickSum() {

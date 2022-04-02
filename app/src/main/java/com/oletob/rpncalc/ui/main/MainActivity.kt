@@ -1,17 +1,16 @@
 package com.oletob.rpncalc.ui.main
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Button
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import com.oletob.rpncalc.R
-import com.oletob.rpncalc.ui.HistoryActivity
 import com.oletob.rpncalc.ui.about.AboutActivity
+import com.oletob.rpncalc.ui.common.BaseActivity
+import com.oletob.rpncalc.ui.history.HistoryActivity
 
-class MainActivity: AppCompatActivity(), MainContract.View {
+class MainActivity: BaseActivity(), MainContract.View {
 
     private lateinit var panelTextView: TextView
     private lateinit var presenter: MainPresenter
@@ -55,8 +54,8 @@ class MainActivity: AppCompatActivity(), MainContract.View {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.button_history -> startActivity(Intent(this, HistoryActivity::class.java))
-            R.id.button_about -> startActivity(Intent(this, AboutActivity::class.java))
+            R.id.button_history -> startActivity(HistoryActivity.createIntent(this))
+            R.id.button_about -> startActivity(AboutActivity.createIntent(this))
             else -> return super.onOptionsItemSelected(item)
         }
         return true

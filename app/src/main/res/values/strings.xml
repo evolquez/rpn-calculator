@@ -38,4 +38,6 @@
     <string name="linkedin">Linkedin</string>
     <string name="app_description">This calculator includes basic operations like (add, subtract, multiply and divide) in addition to showing a simple, clear and beautiful history.</string>
     <string name="version_format">Version %s (%s)</string>
+    <string name="new_line_char_plus_zero">\n0</string>
+    <string name="new_line_char">\n</string>
 </resources>

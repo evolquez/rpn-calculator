@@ -1,8 +1,10 @@
 package com.oletob.rpncalc.ui.main
 
+import com.oletob.rpncalc.ui.common.BaseView
+
 interface MainContract {
 
-    interface View {
+    interface View: BaseView {
         fun setPanelText(text: String)
         fun getPanelText(): String
         fun appendToPanelText(text: String)
