@@ -11,8 +11,6 @@ interface MainContract {
     }
 
     interface Presenter {
-        fun onClickHistory()
-        fun onClickAbout()
 
         fun onClickNumber(number: Int)
 
@@ -20,9 +18,6 @@ interface MainContract {
         fun onClickEnter()
         fun onClickDelete()
 
-        fun onClickSum()
-        fun onClickDivide()
-        fun onClickMultiply()
-        fun onClickSubtract()
+        fun onClickOperator(operator: MainPresenter.Operator)
     }
 }

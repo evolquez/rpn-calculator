@@ -1,5 +1,6 @@
 package com.oletob.rpncalc.model
 
+import com.oletob.rpncalc.ui.main.MainPresenter
 import java.lang.StringBuilder
 import java.text.DecimalFormat
 
@@ -44,6 +45,33 @@ object RpnModel {
         }
 
         return inputBuilder.append("\n0").toString()
+    }
+
+    /**
+     * Process the operation based on operator
+     * @param input
+     * @param operator
+     * @return String
+     **/
+    fun processOperation(input: String, operator: MainPresenter.Operator): String? {
+        val inputList = input.split("\n")
+
+        val listSize = inputList.size
+
+        if(listSize > 1){
+
+            val op1 = inputList[listSize-1].toDouble()
+            val op2 = inputList[listSize-2].toDouble()
+
+            val result = when(operator){
+                MainPresenter.Operator.DIVIDE -> (op1 / op2)
+                MainPresenter.Operator.MULTIPLY -> (op1 * op2)
+                MainPresenter.Operator.SUBTRACT -> (op1 - op2)
+                MainPresenter.Operator.SUM -> (op1 + op2)
+            }
+            return result.toString()
+        }
+        return null
     }
 
     /**

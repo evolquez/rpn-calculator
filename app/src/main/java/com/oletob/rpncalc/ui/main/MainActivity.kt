@@ -37,6 +37,7 @@ class MainActivity: BaseActivity(), MainContract.View {
 
         panelTextView = findViewById(R.id.text_view_panel)
 
+        // Buttons control
         findViewById<Button>(R.id.button_clear).setOnClickListener{presenter.onClickClear()}
         findViewById<Button>(R.id.button_enter).setOnClickListener{presenter.onClickEnter()}
         findViewById<Button>(R.id.button_delete).setOnClickListener{presenter.onClickDelete()}
@@ -45,6 +46,12 @@ class MainActivity: BaseActivity(), MainContract.View {
             val button = findViewById<Button>(it)
             button.setOnClickListener{presenter.onClickNumber(button.text.toString().toInt())}
         }
+
+        // Operators
+        findViewById<Button>(R.id.button_divide).setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.DIVIDE)}
+        findViewById<Button>(R.id.button_multiply).setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.MULTIPLY)}
+        findViewById<Button>(R.id.button_subtract).setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.SUBTRACT)}
+        findViewById<Button>(R.id.button_sum).setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.SUM)}
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

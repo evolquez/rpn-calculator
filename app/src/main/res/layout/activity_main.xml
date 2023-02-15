@@ -128,7 +128,7 @@
         <!-- Column 5 -->
         <LinearLayout style="@style/layoutButtonGroup">
             <Button
-                android:id="@+id/button_devide"
+                android:id="@+id/button_divide"
                 style="@style/btnNumbers"
                 android:background="@color/buttonBgControls"
                 android:text="@string/devide_symbol" />
