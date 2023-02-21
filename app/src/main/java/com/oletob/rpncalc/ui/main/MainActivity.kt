@@ -14,9 +14,11 @@ class MainActivity: BaseActivity(), MainContract.View {
 
     private lateinit var presenter: MainPresenter
 
-    private val mainViewModel: MainViewModel by viewModels()
-
     private lateinit var binding: ActivityMainBinding
+
+    private lateinit var adapter: MainAdapter
+
+    private val numbers = mutableListOf("0")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,7 +27,11 @@ class MainActivity: BaseActivity(), MainContract.View {
 
         setContentView(binding.root)
 
-        presenter = MainPresenter(this)
+        presenter = MainPresenter(this, numbers)
+
+        adapter = MainAdapter(this)
+
+        binding.listViewPanel.adapter = adapter
 
         initClickListeners()
     }
@@ -43,14 +49,18 @@ class MainActivity: BaseActivity(), MainContract.View {
             buttonDelete.setOnClickListener{presenter.onClickDelete()}
 
             numberButtons.forEach {button ->
-                button.setOnClickListener{presenter.onClickNumber(button.text.toString().toInt())}
+                button.setOnClickListener{presenter.onClickNumber(button.text.toString())}
             }
+
+            buttonDot.setOnClickListener{presenter.onClickNumber(buttonDot.text.toString())}
 
             // Operators
             buttonDivide.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.DIVIDE)}
             buttonMultiply.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.MULTIPLY)}
             buttonSubtract.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.SUBTRACT)}
             buttonSum.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.SUM)}
+
+            buttonSymbols.setOnClickListener{presenter.onClickSymbol()}
         }
     }
 
@@ -68,13 +78,9 @@ class MainActivity: BaseActivity(), MainContract.View {
         return true
     }
 
-    override fun getPanelText() = binding.textViewPanel.text.toString()
 
-    override fun setPanelText(text: String) {
-        binding.textViewPanel.text = text
-    }
-
-    override fun appendToPanelText(text: String) {
-        binding.textViewPanel.append(text)
+    override fun setNumbers(numbers: MutableList<String>) {
+        adapter.numbers = numbers
+        adapter.notifyDataSetChanged()
     }
 }

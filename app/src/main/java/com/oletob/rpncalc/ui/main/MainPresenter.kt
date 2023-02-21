@@ -1,46 +1,73 @@
 package com.oletob.rpncalc.ui.main
 
-import com.oletob.rpncalc.R
-import com.oletob.rpncalc.model.RpnModel
+class MainPresenter(private val view: MainActivity, private val numbers: MutableList<String>): MainContract.Presenter {
 
-class MainPresenter(private val view: MainActivity): MainContract.Presenter {
+    override fun onClickNumber(input: String) {
+        val last = numbers.last()
 
-    override fun onClickNumber(number: Int) {
-        if(view.getPanelText().length == 1 && view.getPanelText().toDouble() == 0.0){
-            view.setPanelText(number.toString())
-        }else{
-            view.appendToPanelText(number.toString())
-        }
+        val newInput = if(last.toDouble() == 0.0){
+            if(input == "." || last.last() == '.') last+input else input
+        } else last+input;
+
+        numbers[numbers.lastIndex] = newInput
+        view.setNumbers(numbers)
     }
 
     override fun onClickClear() {
-        view.setPanelText(view.getString(R.string.zero))
+        numbers.clear()
+        numbers.add("0")
+        view.setNumbers(numbers)
     }
 
     override fun onClickEnter() {
-        if(view.getPanelText().last().toString().toDouble() != 0.0){
-            view.setPanelText(RpnModel.formatInput(view.getPanelText()))
-        }
+        if(numbers.last().toDouble() == 0.0) return
+
+        numbers.add("0")
+
+        view.setNumbers(numbers)
     }
 
     override fun onClickDelete() {
-        val newInput = view.getPanelText().substring(0, view.getPanelText().length - 1)
 
-        if(newInput.isNotEmpty() && newInput.last() == '\n'){
-            newInput.let {
-                it.substring(0, it.length - 1)
-            }
+        if(numbers.last().toDouble() != 0.0){
+            val last = numbers.last().dropLast(1)
+            numbers[numbers.lastIndex] = last
+            if(last.isEmpty())
+                numbers.removeLast()
         }
-        view.setPanelText(newInput.ifEmpty { view.getString(R.string.zero) })
+
+        if(numbers.isEmpty())
+            numbers.add("0")
+
+        view.setNumbers(numbers)
     }
 
     override fun onClickOperator(operator: Operator) {
-        val result = RpnModel.processOperation(view.getPanelText(), operator)
+        if(numbers.size > 1){
 
-        if(result != null){
-            view.showToast(result)
-            //view.setPanelText(result)
+            val num1 = numbers.removeLast().toDouble()
+
+            val num2 = numbers.last().toDouble()
+            numbers.removeLast()
+
+            val result = when(operator){
+                Operator.DIVIDE -> num2.div(num1)
+                Operator.MULTIPLY -> num2.times(num1)
+                Operator.SUBTRACT -> num2.minus(num1)
+                Operator.SUM -> num2.plus(num1)
+            }.toDouble().toString()
+
+            numbers.add(result)
+            view.setNumbers(numbers)
         }
+    }
+
+    override fun onClickSymbol() {
+        val lastIndex = numbers.lastIndex
+        val last = numbers[lastIndex].toDouble()
+
+        numbers[lastIndex] = if(last != 0.0) (last * -1).toString() else last.toString()
+        view.setNumbers(numbers)
     }
 
     enum class Operator{

@@ -63,14 +63,14 @@ object RpnModel {
             val op1 = inputList[listSize-1].toDouble()
             val op2 = inputList[listSize-2].toDouble()
 
-            val result = when(operator){
+            return when(operator){
                 MainPresenter.Operator.DIVIDE -> (op1 / op2)
                 MainPresenter.Operator.MULTIPLY -> (op1 * op2)
                 MainPresenter.Operator.SUBTRACT -> (op1 - op2)
                 MainPresenter.Operator.SUM -> (op1 + op2)
-            }
-            return result.toString()
+            }.toString()
         }
+
         return null
     }
 
