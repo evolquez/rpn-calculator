@@ -13,10 +13,15 @@ In addition you can see a history of all operations calculated by the app.
 - Target API 33
 - Min API 24
 
-## Libraries and Dependencies
-...
+## Architecture
+- [Android App Architecture]
+- MVP
 
 ## Screenshots
-...
 
+
+<img src="https://user-images.githubusercontent.com/8124733/220457375-4d5ce817-b974-4199-8680-705291dd456c.png" width="300" />
+<img src="https://user-images.githubusercontent.com/8124733/220457379-9c1b6bb5-27b5-4db7-9d38-abe6105e7169.png" width="300" />
+
+[Android App Architecture]: <https://developer.android.com/topic/architecture>
 
