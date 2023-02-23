@@ -3,7 +3,6 @@ package com.oletob.rpncalc.ui.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import com.oletob.rpncalc.R
 import com.oletob.rpncalc.databinding.ActivityMainBinding
 import com.oletob.rpncalc.ui.about.AboutActivity
@@ -71,13 +70,12 @@ class MainActivity: BaseActivity(), MainContract.View {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.button_history -> startActivity(HistoryActivity.createIntent(this))
-            R.id.button_about -> startActivity(AboutActivity.createIntent(this))
+            R.id.item_history -> startActivity(HistoryActivity.createIntent(this))
+            R.id.item_about -> startActivity(AboutActivity.createIntent(this))
             else -> return super.onOptionsItemSelected(item)
         }
         return true
     }
-
 
     override fun setNumbers(numbers: MutableList<String>) {
         adapter.numbers = numbers
