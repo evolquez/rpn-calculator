@@ -1,8 +1,31 @@
-# RPN Calculator
-RPN Calculator (Reverse Polish Notation)
+# RPN Calculator (Reverse Polish Notation) - Android app
 
-# Description
-This RPN Calculator includes basic operations like (Add, Subtract, Multiply and Divide) in addition to showing a history of the last 5 operations
+This RPN Calculator app includes basic operations such as: 
+- Add
+- Subtract
+- Multiply
+- Divide 
 
-# Screenshot
-![Main Screen](https://cloud.githubusercontent.com/assets/8124733/26289810/ddbd683c-3e70-11e7-84dd-114f9ef5b44a.png)
+In addition you can see a history of all operations calculated by the app.
+
+## Technical Requirements
+- Kotlin
+- Target API 33
+- Min API 24
+
+## Architecture
+- [Android App Architecture]
+- MVP
+
+## Download and Install
+[RPN Calc on Google Play]
+
+## Screenshots
+
+
+<img src="https://user-images.githubusercontent.com/8124733/220457375-4d5ce817-b974-4199-8680-705291dd456c.png" width="300" />
+<img src="https://user-images.githubusercontent.com/8124733/220457379-9c1b6bb5-27b5-4db7-9d38-abe6105e7169.png" width="300" />
+
+[Android App Architecture]: <https://developer.android.com/topic/architecture>
+[RPN Calc on Google Play]: <https://play.google.com/store/apps/details?id=com.oletob.rpncalc>
+

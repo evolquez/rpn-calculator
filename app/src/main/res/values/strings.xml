@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RPN Calc</string>
+    <!--<string name="app_name">RPN Calc</string>-->
     <string name="zero">0</string>
     <string name="clear_btn">CLR</string>
     <string name="clear">Clear</string>
@@ -21,18 +21,20 @@
     <string name="substract_symbol">-</string>
     <string name="sum_symbol">+</string>
     <string name="history">History</string>
-    <string name="history_empty">History empty</string>
+    <string name="no_history">No History</string>
     <string name="clear_history_message">Are you sure you want to clear the whole history?</string>
     <string name="yes">Yes</string>
     <string name="alert_dialog_ok">OK</string>
     <string name="alert_dialog_cancel">Cancel</string>
     <string name="about">About</string>
-    <string name="made_in_santo_domingo">Made with &#9829; in Santo Domingo, DR by</string>
+    <string name="made_in_santo_domingo">Made with &#9829; in &#127465;&#127476;</string>
     <string name="author_name">Algenis Volquez</string>
-    <string name="author_linkedin_profile">https://www.linkedin.com/in/evolquez/</string>
-    <string name="author_github_profile">https://github.com/evolquez</string>
+    <string name="author_github_profile">https://github.com/evolquez/rpn-calculator</string>
     <string name="rpn_calculator">RPN Calculator</string>
+    <string name="reverse_polish_notation">Reverse Polish Notation</string>
     <string name="github">Github</string>
-    <string name="linkedin">Linkedin</string>
-    <string name="app_description">This RPN Calculator includes basic operations like (Add, Subtract, Multiply and Divide) in addition to showing a simple and beautiful history.</string>
+    <string name="app_description">This RPN Calculator includes basic operations such as (add, subtract, multiply and divide) In addition you can see a history of all operations calculated by the app.</string>
+    <string name="version_format">Version %s (%s)</string>
+    <string name="new_line_char_plus_zero">\n0</string>
+    <string name="new_line_char">\n</string>
 </resources>
