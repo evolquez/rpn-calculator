@@ -1,6 +1,6 @@
-# RPN Calculator (Reverse Polish Notation)
+# RPN Calculator (Reverse Polish Notation) - Android app
 
-This RPN Calculator Android app includes basic operations such as: 
+This RPN Calculator app includes basic operations such as: 
 - Add
 - Subtract
 - Multiply
