@@ -62,7 +62,6 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
         return super.onCreateOptionsMenu(menu)
     }
 
-
     @SuppressLint("NotifyDataSetChanged")
     override fun showHistory(items: List<HistoryPresenter.BaseItem>) {
         adapter.items = items
@@ -70,14 +69,16 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
     }
 
     inner class HistoryAdapter: RecyclerView.Adapter<BaseViewHolder<in HistoryPresenter.BaseItem>>() {
-        private val inflater = LayoutInflater.from(this@HistoryActivity)
+
         var items: List<HistoryPresenter.BaseItem> = emptyList()
 
-        @Suppress("UNCHECKED_CAST", "IMPLICIT_CAST_TO_ANY")
+        @Suppress("UNCHECKED_CAST")
         override fun onCreateViewHolder(
             parent: ViewGroup,
             viewType: Int
         ): BaseViewHolder<in HistoryPresenter.BaseItem> {
+            val inflater = LayoutInflater.from(parent.context)
+
             return when(HistoryPresenter.ItemType.fromValue(viewType)) {
                 HistoryPresenter.ItemType.HistoryItem -> HistoryItemViewHolder(HistoryItemBinding.inflate(inflater, parent, false))
                 HistoryPresenter.ItemType.EmptyItem -> EmptyItemViewHolder(NoHistoryItemBinding.inflate(inflater, parent, false))
