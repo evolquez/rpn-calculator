@@ -1,63 +1,79 @@
 package com.oletob.rpncalc.ui.main
 
-import com.oletob.rpncalc.R
-import com.oletob.rpncalc.model.RpnModel
+class MainPresenter(private val view: MainActivity, private val numbers: MutableList<String>): MainContract.Presenter {
 
-class MainPresenter(private val view: MainActivity): MainContract.Presenter {
+    override fun onClickNumber(input: String) {
+        val last = numbers.last()
 
-    override fun onClickHistory() {
-        TODO("Not yet implemented")
-    }
+        val newInput = if(last.toDouble() == 0.0){
+            if(input == "." || last.last() == '.') last+input else input
+        } else last+input;
 
-    override fun onClickAbout() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onClickNumber(number: Int) {
-        if(view.getPanelText().length == 1 && view.getPanelText().toDouble() == 0.0){
-            view.setPanelText(number.toString())
-        }else{
-            view.appendToPanelText(number.toString())
-        }
+        numbers[numbers.lastIndex] = newInput
+        view.setNumbers(numbers)
     }
 
     override fun onClickClear() {
-        view.setPanelText(view.getString(R.string.zero))
+        numbers.clear()
+        numbers.add("0")
+        view.setNumbers(numbers)
     }
 
     override fun onClickEnter() {
+        if(numbers.last().toDouble() == 0.0) return
 
-        if(view.getPanelText().last().toString().toDouble() != 0.0){
-            view.setPanelText(RpnModel.formatInput(view.getPanelText()))
-        }
+        numbers.add("0")
+
+        view.setNumbers(numbers)
     }
 
     override fun onClickDelete() {
 
-        val newInput = view.getPanelText().substring(0, view.getPanelText().length - 1)
-
-        if(newInput.isNotEmpty() && newInput.last() == '\n'){
-            newInput.let {
-                it.substring(0, it.length - 1)
-            }
+        if(numbers.last().toDouble() != 0.0){
+            val last = numbers.last().dropLast(1)
+            numbers[numbers.lastIndex] = last
+            if(last.isEmpty())
+                numbers.removeLast()
         }
 
-        view.setPanelText(newInput.ifEmpty { view.getString(R.string.zero) })
+        if(numbers.isEmpty())
+            numbers.add("0")
+
+        view.setNumbers(numbers)
     }
 
-    override fun onClickSum() {
-        TODO("Not yet implemented")
+    override fun onClickOperator(operator: Operator) {
+        if(numbers.size > 1){
+
+            val num1 = numbers.removeLast().toDouble()
+
+            val num2 = numbers.last().toDouble()
+            numbers.removeLast()
+
+            val result = when(operator){
+                Operator.DIVIDE -> num2.div(num1)
+                Operator.MULTIPLY -> num2.times(num1)
+                Operator.SUBTRACT -> num2.minus(num1)
+                Operator.SUM -> num2.plus(num1)
+            }.toDouble().toString()
+
+            numbers.add(result)
+            view.setNumbers(numbers)
+        }
     }
 
-    override fun onClickDivide() {
-        TODO("Not yet implemented")
+    override fun onClickSymbol() {
+        val lastIndex = numbers.lastIndex
+        val last = numbers[lastIndex].toDouble()
+
+        numbers[lastIndex] = if(last != 0.0) (last * -1).toString() else last.toString()
+        view.setNumbers(numbers)
     }
 
-    override fun onClickMultiply() {
-        TODO("Not yet implemented")
-    }
-
-    override fun onClickSubtract() {
-        TODO("Not yet implemented")
+    enum class Operator{
+        SUM,
+        SUBTRACT,
+        MULTIPLY,
+        DIVIDE
     }
 }

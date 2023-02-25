@@ -5,45 +5,44 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.ImageView
-import android.widget.TextView
 import com.oletob.rpncalc.BuildConfig
 import com.oletob.rpncalc.R
+import com.oletob.rpncalc.databinding.ActivityAboutBinding
 import com.oletob.rpncalc.ui.common.BaseActivity
 
 class AboutActivity: BaseActivity(), AboutContract.View {
 
-    private lateinit var versionTextView: TextView
     private lateinit var presenter: AboutContract.Presenter
+
+    private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_about)
 
-        versionTextView = findViewById(R.id.text_view_version)
+        binding = ActivityAboutBinding.inflate(layoutInflater)
+
+        setContentView(binding.root)
 
         setActionBar(R.string.about, true)
 
         presenter = AboutPresenter(this)
+        presenter.init()
 
-        findViewById<ImageView>(R.id.image_view_linkedin).setOnClickListener{presenter.onClickLinkedIn()}
-        findViewById<ImageView>(R.id.image_view_github).setOnClickListener{presenter.onClickGithub()}
+        binding.imageViewGithub.setOnClickListener{presenter.onClickGithub()}
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == android.R.id.home) onBackPressed()
+        if(item.itemId == android.R.id.home) onBackPressedDispatcher.onBackPressed()
 
         return super.onOptionsItemSelected(item)
     }
 
     override fun setVersion() {
-        versionTextView.text = String.format(getString(R.string.version_format),
-            BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
+        binding.textViewVersion.text = String.format(getString(R.string.version_format), BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
     }
 
     override fun startSocialProfile(socialProfile: AboutPresenter.SocialProfile) {
         val resString = when(socialProfile){
-            AboutPresenter.SocialProfile.LINKEDIN -> R.string.author_linkedin_profile
             AboutPresenter.SocialProfile.GITHUB -> R.string.author_github_profile
         }
 

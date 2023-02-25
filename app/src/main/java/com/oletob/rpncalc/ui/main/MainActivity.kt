@@ -3,47 +3,63 @@ package com.oletob.rpncalc.ui.main
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Button
-import android.widget.TextView
 import com.oletob.rpncalc.R
+import com.oletob.rpncalc.databinding.ActivityMainBinding
 import com.oletob.rpncalc.ui.about.AboutActivity
 import com.oletob.rpncalc.ui.common.BaseActivity
 import com.oletob.rpncalc.ui.history.HistoryActivity
 
 class MainActivity: BaseActivity(), MainContract.View {
 
-    private lateinit var panelTextView: TextView
     private lateinit var presenter: MainPresenter
 
-    //Numbered buttons
-    private val numberButtons = listOf(
-        R.id.button_0,
-        R.id.button_1,
-        R.id.button_2,
-        R.id.button_3,
-        R.id.button_4,
-        R.id.button_5,
-        R.id.button_6,
-        R.id.button_7,
-        R.id.button_8,
-        R.id.button_9
-    )
+    private lateinit var binding: ActivityMainBinding
+
+    private lateinit var adapter: MainAdapter
+
+    private val numbers = mutableListOf("0")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
 
-        presenter = MainPresenter(this)
+        binding = ActivityMainBinding.inflate(layoutInflater)
 
-        panelTextView = findViewById(R.id.text_view_panel)
+        setContentView(binding.root)
 
-        findViewById<Button>(R.id.button_clear).setOnClickListener{presenter.onClickClear()}
-        findViewById<Button>(R.id.button_enter).setOnClickListener{presenter.onClickEnter()}
-        findViewById<Button>(R.id.button_delete).setOnClickListener{presenter.onClickDelete()}
+        presenter = MainPresenter(this, numbers)
 
-        numberButtons.forEach{
-            val button = findViewById<Button>(it)
-            button.setOnClickListener{presenter.onClickNumber(button.text.toString().toInt())}
+        adapter = MainAdapter(this)
+
+        binding.listViewPanel.adapter = adapter
+
+        initClickListeners()
+    }
+
+    private fun initClickListeners() {
+
+        //Numbered buttons
+        val numberButtons = listOf(binding.button0, binding.button1, binding.button2, binding.button3, binding.button4, binding.button5, binding.button6, binding.button7, binding.button8, binding.button9)
+
+        with(binding){
+
+            // Buttons control
+            buttonClear.setOnClickListener{presenter.onClickClear()}
+            buttonEnter.setOnClickListener{presenter.onClickEnter()}
+            buttonDelete.setOnClickListener{presenter.onClickDelete()}
+
+            numberButtons.forEach {button ->
+                button.setOnClickListener{presenter.onClickNumber(button.text.toString())}
+            }
+
+            buttonDot.setOnClickListener{presenter.onClickNumber(buttonDot.text.toString())}
+
+            // Operators
+            buttonDivide.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.DIVIDE)}
+            buttonMultiply.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.MULTIPLY)}
+            buttonSubtract.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.SUBTRACT)}
+            buttonSum.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.SUM)}
+
+            buttonSymbols.setOnClickListener{presenter.onClickSymbol()}
         }
     }
 
@@ -54,20 +70,15 @@ class MainActivity: BaseActivity(), MainContract.View {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.button_history -> startActivity(HistoryActivity.createIntent(this))
-            R.id.button_about -> startActivity(AboutActivity.createIntent(this))
+            R.id.item_history -> startActivity(HistoryActivity.createIntent(this))
+            R.id.item_about -> startActivity(AboutActivity.createIntent(this))
             else -> return super.onOptionsItemSelected(item)
         }
         return true
     }
 
-    override fun getPanelText() = panelTextView.text.toString()
-
-    override fun setPanelText(text: String) {
-        panelTextView.text = text
-    }
-
-    override fun appendToPanelText(text: String) {
-        panelTextView.append(text)
+    override fun setNumbers(numbers: MutableList<String>) {
+        adapter.numbers = numbers
+        adapter.notifyDataSetChanged()
     }
 }

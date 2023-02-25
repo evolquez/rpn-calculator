@@ -11,7 +11,6 @@ interface AboutContract {
 
     interface Presenter{
         fun init()
-        fun onClickLinkedIn()
         fun onClickGithub()
     }
 }

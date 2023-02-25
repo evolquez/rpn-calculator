@@ -5,24 +5,16 @@ import com.oletob.rpncalc.ui.common.BaseView
 interface MainContract {
 
     interface View: BaseView {
-        fun setPanelText(text: String)
-        fun getPanelText(): String
-        fun appendToPanelText(text: String)
+        fun setNumbers(numbers: MutableList<String>)
     }
 
     interface Presenter {
-        fun onClickHistory()
-        fun onClickAbout()
 
-        fun onClickNumber(number: Int)
-
+        fun onClickNumber(input: String)
         fun onClickClear()
         fun onClickEnter()
         fun onClickDelete()
-
-        fun onClickSum()
-        fun onClickDivide()
-        fun onClickMultiply()
-        fun onClickSubtract()
+        fun onClickOperator(operator: MainPresenter.Operator)
+        fun onClickSymbol()
     }
 }
