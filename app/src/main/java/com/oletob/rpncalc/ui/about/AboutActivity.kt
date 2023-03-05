@@ -46,7 +46,7 @@ class AboutActivity: BaseActivity(), AboutContract.View {
     }
 
     override fun setVersion() {
-        binding.textViewVersion.text = String.format(getString(R.string.version_format), BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
+        binding.textViewVersion.text = getString(R.string.version_format, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
     }
 
     override fun startSocialProfile(socialProfile: AboutPresenter.SocialProfile) {
