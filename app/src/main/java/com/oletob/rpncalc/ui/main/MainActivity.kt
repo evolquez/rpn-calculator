@@ -4,29 +4,35 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import com.oletob.rpncalc.R
+import com.oletob.rpncalc.RpnApplication
 import com.oletob.rpncalc.databinding.ActivityMainBinding
 import com.oletob.rpncalc.ui.about.AboutActivity
-import com.oletob.rpncalc.ui.common.BaseActivity
+import com.oletob.rpncalc.ui.base.BaseActivity
 import com.oletob.rpncalc.ui.history.HistoryActivity
+import javax.inject.Inject
 
 class MainActivity: BaseActivity(), MainContract.View {
 
-    private lateinit var presenter: MainPresenter
+    @Inject
+    lateinit var presenter: MainContract.Presenter
 
     private lateinit var binding: ActivityMainBinding
 
     private lateinit var adapter: MainAdapter
 
-    private val numbers = mutableListOf("0")
-
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        (applicationContext as RpnApplication)
+            .appGraph
+            .mainComponent()
+            .create(this)
+            .inject(this)
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityMainBinding.inflate(layoutInflater)
 
         setContentView(binding.root)
-
-        presenter = MainPresenter(this, numbers)
 
         adapter = MainAdapter(this)
 

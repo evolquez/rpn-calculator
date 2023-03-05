@@ -1,4 +1,4 @@
-package com.oletob.rpncalc.ui.common
+package com.oletob.rpncalc.ui.base
 
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity

@@ -1,13 +1,15 @@
 package com.oletob.rpncalc.ui.main
 
-class MainPresenter(private val view: MainActivity, private val numbers: MutableList<String>): MainContract.Presenter {
+class MainPresenter(private val view: MainContract.View): MainContract.Presenter {
+
+    private val numbers = mutableListOf("0")
 
     override fun onClickNumber(input: String) {
         val last = numbers.last()
 
         val newInput = if(last.toDouble() == 0.0){
             if(input == "." || last.last() == '.') last+input else input
-        } else last+input;
+        } else last+input
 
         numbers[numbers.lastIndex] = newInput
         view.setNumbers(numbers)
