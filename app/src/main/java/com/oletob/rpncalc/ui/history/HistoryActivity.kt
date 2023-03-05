@@ -12,18 +12,29 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.oletob.rpncalc.R
+import com.oletob.rpncalc.RpnApplication
 import com.oletob.rpncalc.databinding.ActivityHistoryBinding
 import com.oletob.rpncalc.databinding.HistoryItemBinding
 import com.oletob.rpncalc.databinding.NoHistoryItemBinding
-import com.oletob.rpncalc.ui.common.BaseActivity
+import com.oletob.rpncalc.ui.base.BaseActivity
+import javax.inject.Inject
 
 class HistoryActivity: BaseActivity(), HistoryContract.View {
 
-    private lateinit var presenter: HistoryContract.Presenter
+    @Inject
+    lateinit var presenter: HistoryContract.Presenter
+
     private lateinit var binding: ActivityHistoryBinding
     private lateinit var adapter: HistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        (applicationContext as RpnApplication)
+            .appGraph
+            .historyComponent()
+            .create(this)
+            .inject(this)
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityHistoryBinding.inflate(layoutInflater)
@@ -40,7 +51,6 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
 
         setActionBar(R.string.history, true)
 
-        presenter = HistoryPresenter(this)
         presenter.init()
     }
 
