@@ -34,7 +34,7 @@
     <string name="reverse_polish_notation">Reverse Polish Notation</string>
     <string name="github">Github</string>
     <string name="app_description">This RPN Calculator includes basic operations such as (add, subtract, multiply and divide) In addition you can see a history of all operations calculated by the app.</string>
-    <string name="version_format">Version %s (%s)</string>
+    <string name="version_format">RPN Calc version %1$s (build %2$d)</string>
     <string name="new_line_char_plus_zero">\n0</string>
     <string name="new_line_char">\n</string>
 </resources>

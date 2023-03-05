@@ -59,8 +59,7 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/made_in_santo_domingo"
-            android:textSize="12sp"
-            android:textStyle="italic" />
+            android:textSize="13sp" />
 
         <ImageView
             android:id="@+id/image_view_github"
@@ -78,8 +77,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
-            android:textSize="12sp"
-            android:textStyle="italic"
+            android:textSize="13sp"
             tools:text="Version 1.0.0" />
     </LinearLayout>
 

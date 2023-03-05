@@ -1,6 +1,6 @@
 package com.oletob.rpncalc.ui.about
 
-class AboutPresenter(private val view: AboutActivity): AboutContract.Presenter {
+class AboutPresenter(private val view: AboutContract.View): AboutContract.Presenter {
 
     override fun init() {
         view.setVersion()

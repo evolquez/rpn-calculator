@@ -13,6 +13,9 @@ In addition you can see a history of all operations calculated by the app.
 - Target API 33
 - Min API 24
 
+## Libraries
+- Dagger2 - Dependency injection
+
 ## Architecture
 - [Android App Architecture]
 - MVP

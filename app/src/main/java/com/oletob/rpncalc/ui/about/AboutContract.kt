@@ -1,6 +1,6 @@
 package com.oletob.rpncalc.ui.about
 
-import com.oletob.rpncalc.ui.common.BaseView
+import com.oletob.rpncalc.ui.base.BaseView
 
 interface AboutContract {
 

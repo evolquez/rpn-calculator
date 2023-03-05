@@ -7,16 +7,25 @@ import android.os.Bundle
 import android.view.MenuItem
 import com.oletob.rpncalc.BuildConfig
 import com.oletob.rpncalc.R
+import com.oletob.rpncalc.RpnApplication
 import com.oletob.rpncalc.databinding.ActivityAboutBinding
-import com.oletob.rpncalc.ui.common.BaseActivity
+import com.oletob.rpncalc.ui.base.BaseActivity
+import javax.inject.Inject
 
 class AboutActivity: BaseActivity(), AboutContract.View {
 
-    private lateinit var presenter: AboutContract.Presenter
+    @Inject lateinit var presenter: AboutContract.Presenter
 
     private lateinit var binding: ActivityAboutBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        (applicationContext as RpnApplication)
+            .appGraph
+            .aboutComponent()
+            .create(this)
+            .inject(this)
+
         super.onCreate(savedInstanceState)
 
         binding = ActivityAboutBinding.inflate(layoutInflater)
@@ -25,7 +34,6 @@ class AboutActivity: BaseActivity(), AboutContract.View {
 
         setActionBar(R.string.about, true)
 
-        presenter = AboutPresenter(this)
         presenter.init()
 
         binding.imageViewGithub.setOnClickListener{presenter.onClickGithub()}
@@ -38,7 +46,7 @@ class AboutActivity: BaseActivity(), AboutContract.View {
     }
 
     override fun setVersion() {
-        binding.textViewVersion.text = String.format(getString(R.string.version_format), BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
+        binding.textViewVersion.text = getString(R.string.version_format, BuildConfig.VERSION_NAME, BuildConfig.VERSION_CODE)
     }
 
     override fun startSocialProfile(socialProfile: AboutPresenter.SocialProfile) {

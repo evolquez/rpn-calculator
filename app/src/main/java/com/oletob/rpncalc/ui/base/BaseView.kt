@@ -1,4 +1,4 @@
-package com.oletob.rpncalc.ui.common
+package com.oletob.rpncalc.ui.base
 
 import androidx.annotation.StringRes
 
