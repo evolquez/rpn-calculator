@@ -53,14 +53,6 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/made_in_santo_domingo"
-            android:textSize="13sp" />
-
         <ImageView
             android:id="@+id/image_view_github"
             android:layout_height="42dp"

@@ -1,13 +1,38 @@
 package com.oletob.rpncalc.ui.history
 
-class HistoryPresenter(private val view: HistoryContract.View): HistoryContract.Presenter {
+import com.oletob.rpncalc.data.repository.MathOperationRepository
+
+class HistoryPresenter(
+    private val view: HistoryContract.View,
+    private val mathOperationRepository: MathOperationRepository
+): HistoryContract.Presenter {
+
+    private val historyItems = ArrayList<BaseItem>()
 
     override fun init() {
-        val newItems = ArrayList<BaseItem>()
 
-        newItems.add(EmptyRowItem())
+        val history = mathOperationRepository.getHistory()
 
-        view.showHistory(newItems)
+        if(history.isNotEmpty()){
+            history.forEach{
+                historyItems.add(HistoryRowItem(it.statement, it.result))
+            }
+        }else{
+            historyItems.add(EmptyRowItem())
+        }
+
+        view.showHistory(historyItems)
+    }
+
+    override fun onClickClear() {
+        view.showClearConfirmation()
+    }
+
+    override fun clearHistory() {
+        mathOperationRepository.clear()
+        historyItems.clear()
+        historyItems.add(EmptyRowItem())
+        view.showHistory(historyItems)
     }
     class HistoryRowItem(val expression: String, val result: Double): BaseItem(ItemType.HistoryItem)
     class EmptyRowItem: BaseItem(ItemType.EmptyItem)

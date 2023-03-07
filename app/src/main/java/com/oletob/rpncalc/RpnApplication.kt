@@ -9,5 +9,5 @@ open class RpnApplication: Application() {
     val appGraph: ApplicationGraph by lazy {
         initGraph()
     }
-    private fun initGraph(): ApplicationGraph = DaggerApplicationGraph.factory().create()
+    private fun initGraph(): ApplicationGraph = DaggerApplicationGraph.factory().create(applicationContext)
 }
