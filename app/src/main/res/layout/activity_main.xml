@@ -10,19 +10,6 @@
     android:paddingRight="8dp"
     tools:context="com.oletob.rpncalc.ui.main.MainActivity">
 
-    <!--<TextView
-        android:id="@+id/text_view_panel"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentTop="true"
-        android:layout_gravity="bottom|end"
-        android:background="@android:color/white"
-        android:gravity="bottom|end"
-        android:padding="5dp"
-        android:text="@string/zero"
-        android:textColor="@android:color/black"
-        android:textSize="24sp" />-->
-
     <ListView
         android:id="@+id/list_view_panel"
         android:layout_width="match_parent"
@@ -141,7 +128,7 @@
                 android:id="@+id/button_divide"
                 style="@style/btnNumbers"
                 android:background="@color/buttonBgControls"
-                android:text="@string/devide_symbol" />
+                android:text="@string/divide_symbol" />
 
             <Button
                 android:id="@+id/button_multiply"
@@ -153,7 +140,7 @@
                 android:id="@+id/button_subtract"
                 style="@style/btnNumbers"
                 android:background="@color/buttonBgControls"
-                android:text="@string/substract_symbol" />
+                android:text="@string/subtract_symbol" />
 
             <Button
                 android:id="@+id/button_sum"
