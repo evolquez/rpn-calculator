@@ -9,6 +9,8 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AlertDialog
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.oletob.rpncalc.R
@@ -25,7 +27,7 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
     lateinit var presenter: HistoryContract.Presenter
 
     private lateinit var binding: ActivityHistoryBinding
-    private lateinit var adapter: HistoryAdapter
+    private lateinit var historyAdapter: HistoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -41,12 +43,13 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
 
         setContentView(binding.root)
 
-        adapter = HistoryAdapter()
+        historyAdapter = HistoryAdapter()
 
-        with(binding) {
-            recyclerView.setHasFixedSize(false)
-            recyclerView.layoutManager = LinearLayoutManager(this@HistoryActivity)
-            recyclerView.adapter = adapter
+        with(binding.recyclerView) {
+            setHasFixedSize(false)
+            layoutManager = LinearLayoutManager(this@HistoryActivity)
+            addItemDecoration(DividerItemDecoration(this@HistoryActivity, LinearLayoutManager.VERTICAL))
+            adapter = historyAdapter
         }
 
         setActionBar(R.string.history, true)
@@ -60,7 +63,7 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
         }
         when(item.itemId){
             android.R.id.home -> onBackPressedDispatcher.onBackPressed()
-            R.id.item_clear -> showToast(getString(R.string.history))
+            R.id.item_clear -> presenter.onClickClear()
         }
 
         return super.onOptionsItemSelected(item)
@@ -72,10 +75,19 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
         return super.onCreateOptionsMenu(menu)
     }
 
+    override fun showClearConfirmation() {
+        AlertDialog.Builder(this)
+            .setMessage(R.string.clear_history_message)
+            .setPositiveButton(R.string.yes) {_, _ -> presenter.clearHistory()}
+            .setNegativeButton(R.string.no, null)
+            .show()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     override fun showHistory(items: List<HistoryPresenter.BaseItem>) {
-        adapter.items = items
-        adapter.notifyDataSetChanged()
+        historyAdapter.items = items
+        historyAdapter.notifyDataSetChanged()
+        binding.recyclerView.scrollToPosition(items.size - 1)
     }
 
     inner class HistoryAdapter: RecyclerView.Adapter<BaseViewHolder<in HistoryPresenter.BaseItem>>() {

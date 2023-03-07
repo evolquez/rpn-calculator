@@ -1,6 +1,13 @@
 package com.oletob.rpncalc.ui.main
 
-class MainPresenter(private val view: MainContract.View): MainContract.Presenter {
+import com.oletob.rpncalc.R
+import com.oletob.rpncalc.data.model.entity.MathOperation
+import com.oletob.rpncalc.data.repository.MathOperationRepository
+
+class MainPresenter(
+    private val view: MainContract.View,
+    private val mathOperationRepository: MathOperationRepository
+): MainContract.Presenter {
 
     private val numbers = mutableListOf("0")
 
@@ -48,8 +55,8 @@ class MainPresenter(private val view: MainContract.View): MainContract.Presenter
         if(numbers.size > 1){
 
             val num1 = numbers.removeLast().toDouble()
-
             val num2 = numbers.last().toDouble()
+
             numbers.removeLast()
 
             val result = when(operator){
@@ -57,9 +64,17 @@ class MainPresenter(private val view: MainContract.View): MainContract.Presenter
                 Operator.MULTIPLY -> num2.times(num1)
                 Operator.SUBTRACT -> num2.minus(num1)
                 Operator.SUM -> num2.plus(num1)
-            }.toDouble().toString()
+            }.toDouble()
 
-            numbers.add(result)
+            val statement: String = view
+                .getString(
+                    R.string.math_operation_format,
+                    num2,
+                    view.getString(operator.symbol),
+                    num1)
+
+            mathOperationRepository.addOperation(MathOperation(0, statement, result))
+            numbers.add(result.toString())
             view.setNumbers(numbers)
         }
     }
@@ -72,10 +87,10 @@ class MainPresenter(private val view: MainContract.View): MainContract.Presenter
         view.setNumbers(numbers)
     }
 
-    enum class Operator{
-        SUM,
-        SUBTRACT,
-        MULTIPLY,
-        DIVIDE
+    enum class Operator(val symbol: Int){
+        SUM(R.string.sum_symbol),
+        SUBTRACT(R.string.subtract_symbol),
+        MULTIPLY(R.string.multiply_symbol),
+        DIVIDE(R.string.divide_symbol)
     }
 }

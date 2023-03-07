@@ -1,5 +1,6 @@
 package com.oletob.rpncalc.ui.main.di
 
+import com.oletob.rpncalc.data.repository.MathOperationRepository
 import com.oletob.rpncalc.di.ActivityScope
 import com.oletob.rpncalc.ui.main.MainContract
 import com.oletob.rpncalc.ui.main.MainPresenter
@@ -11,7 +12,7 @@ class MainModule {
 
     @ActivityScope
     @Provides
-    fun presenter(view: MainContract.View): MainContract.Presenter {
-        return MainPresenter(view)
+    fun presenter(view: MainContract.View, mathOperationRepository: MathOperationRepository): MainContract.Presenter {
+        return MainPresenter(view, mathOperationRepository)
     }
 }
