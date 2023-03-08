@@ -85,8 +85,10 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun showHistory(items: List<HistoryPresenter.BaseItem>) {
-        historyAdapter.items = items
-        historyAdapter.notifyDataSetChanged()
+        with(historyAdapter) {
+            this.items = items
+            notifyDataSetChanged()
+        }
         binding.recyclerView.scrollToPosition(items.size - 1)
     }
 
@@ -108,10 +110,7 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
             } as BaseViewHolder<in HistoryPresenter.BaseItem>
         }
 
-        override fun onBindViewHolder(
-            holder: BaseViewHolder<in HistoryPresenter.BaseItem>,
-            position: Int
-        ) {
+        override fun onBindViewHolder(holder: BaseViewHolder<in HistoryPresenter.BaseItem>, position: Int) {
             holder.bind(items[position])
         }
 

@@ -34,38 +34,35 @@ class MainActivity: BaseActivity(), MainContract.View {
 
         setContentView(binding.root)
 
-        adapter = MainAdapter(this)
-
-        binding.listViewPanel.adapter = adapter
+        adapter = MainAdapter(this).also{
+            binding.listViewPanel.adapter = it
+        }
 
         initClickListeners()
     }
 
     private fun initClickListeners() {
 
-        //Numbered buttons
-        val numberButtons = listOf(binding.button0, binding.button1, binding.button2, binding.button3, binding.button4, binding.button5, binding.button6, binding.button7, binding.button8, binding.button9)
-
         with(binding){
 
             // Buttons control
-            buttonClear.setOnClickListener{presenter.onClickClear()}
-            buttonEnter.setOnClickListener{presenter.onClickEnter()}
-            buttonDelete.setOnClickListener{presenter.onClickDelete()}
+            buttonClear.setOnClickListener { presenter.onClickClear() }
+            buttonEnter.setOnClickListener { presenter.onClickEnter() }
+            buttonDelete.setOnClickListener { presenter.onClickDelete() }
 
-            numberButtons.forEach {button ->
-                button.setOnClickListener{presenter.onClickNumber(button.text.toString())}
+            getNumberButtonList().forEach { button ->
+                button.setOnClickListener { presenter.onClickNumber(button.text.toString()) }
             }
 
-            buttonDot.setOnClickListener{presenter.onClickNumber(buttonDot.text.toString())}
+            buttonDot.setOnClickListener { presenter.onClickNumber(buttonDot.text.toString()) }
 
             // Operators
-            buttonDivide.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.DIVIDE)}
-            buttonMultiply.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.MULTIPLY)}
-            buttonSubtract.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.SUBTRACT)}
-            buttonSum.setOnClickListener{presenter.onClickOperator(MainPresenter.Operator.SUM)}
+            buttonDivide.setOnClickListener { presenter.onClickOperator(MainPresenter.Operator.DIVIDE) }
+            buttonMultiply.setOnClickListener { presenter.onClickOperator(MainPresenter.Operator.MULTIPLY) }
+            buttonSubtract.setOnClickListener { presenter.onClickOperator(MainPresenter.Operator.SUBTRACT) }
+            buttonSum.setOnClickListener { presenter.onClickOperator(MainPresenter.Operator.SUM) }
 
-            buttonSymbols.setOnClickListener{presenter.onClickSymbol()}
+            buttonSymbols.setOnClickListener { presenter.onClickSymbol() }
         }
     }
 
@@ -83,8 +80,22 @@ class MainActivity: BaseActivity(), MainContract.View {
         return true
     }
 
-    override fun setNumbers(numbers: MutableList<String>) {
-        adapter.numbers = numbers
-        adapter.notifyDataSetChanged()
+    override fun setNumbers(numbersList: MutableList<String>) {
+        adapter.apply {
+            numbers = numbersList
+        }.also { it.notifyDataSetChanged() }
     }
+
+    private fun getNumberButtonList() = listOf(
+        binding.button0,
+        binding.button1,
+        binding.button2,
+        binding.button3,
+        binding.button4,
+        binding.button5,
+        binding.button6,
+        binding.button7,
+        binding.button8,
+        binding.button9
+    )
 }
