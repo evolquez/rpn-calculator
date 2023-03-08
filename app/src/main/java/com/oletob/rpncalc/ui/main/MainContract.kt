@@ -5,7 +5,7 @@ import com.oletob.rpncalc.ui.base.BaseView
 interface MainContract {
 
     interface View: BaseView {
-        fun setNumbers(numbers: MutableList<String>)
+        fun setNumbers(numbersList: MutableList<String>)
     }
 
     interface Presenter {

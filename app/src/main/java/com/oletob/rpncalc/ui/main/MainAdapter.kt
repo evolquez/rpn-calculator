@@ -20,7 +20,6 @@ class MainAdapter(private val context: Context) : BaseAdapter() {
 
     override fun getItemId(position: Int) = position.toLong()
 
-
     @SuppressLint("ViewHolder")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         binding = NumberItemBinding.inflate(LayoutInflater.from(context), parent, false)

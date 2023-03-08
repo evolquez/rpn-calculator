@@ -10,7 +10,9 @@ abstract class BaseActivity: AppCompatActivity(), BaseView {
     }
 
     override fun setActionBar(titleRes: Int, displayHomeAsUpEnabled: Boolean) {
-        supportActionBar?.title = getString(titleRes)
-        supportActionBar?.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
+        supportActionBar?.let {
+            title = getString(titleRes)
+            it.setDisplayHomeAsUpEnabled(displayHomeAsUpEnabled)
+        }
     }
 }

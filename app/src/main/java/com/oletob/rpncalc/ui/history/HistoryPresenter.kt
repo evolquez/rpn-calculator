@@ -14,7 +14,7 @@ class HistoryPresenter(
         val history = mathOperationRepository.getHistory()
 
         if(history.isNotEmpty()){
-            history.forEach{
+            history.forEach {
                 historyItems.add(HistoryRowItem(it.statement, it.result))
             }
         }else{
@@ -30,9 +30,10 @@ class HistoryPresenter(
 
     override fun clearHistory() {
         mathOperationRepository.clear()
-        historyItems.clear()
-        historyItems.add(EmptyRowItem())
-        view.showHistory(historyItems)
+        historyItems.apply {
+            clear()
+            add(EmptyRowItem())
+        }.also {  view.showHistory(it) }
     }
     class HistoryRowItem(val expression: String, val result: Double): BaseItem(ItemType.HistoryItem)
     class EmptyRowItem: BaseItem(ItemType.EmptyItem)
