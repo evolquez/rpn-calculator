@@ -1,6 +1,5 @@
 package com.oletob.rpncalc.ui.history
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -52,6 +51,16 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
             adapter = historyAdapter
         }
 
+        presenter.liveHistory().observe(this) {items ->
+            items?.let {
+                with(historyAdapter) {
+                    this.items = items
+                    notifyDataSetChanged()
+                }
+                binding.recyclerView.scrollToPosition(items.size - 1)
+            }
+        }
+
         setActionBar(R.string.history, true)
 
         presenter.init()
@@ -81,15 +90,6 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
             .setPositiveButton(R.string.yes) {_, _ -> presenter.clearHistory()}
             .setNegativeButton(R.string.no, null)
             .show()
-    }
-
-    @SuppressLint("NotifyDataSetChanged")
-    override fun showHistory(items: List<HistoryPresenter.BaseItem>) {
-        with(historyAdapter) {
-            this.items = items
-            notifyDataSetChanged()
-        }
-        binding.recyclerView.scrollToPosition(items.size - 1)
     }
 
     inner class HistoryAdapter: RecyclerView.Adapter<BaseViewHolder<in HistoryPresenter.BaseItem>>() {

@@ -6,13 +6,13 @@ import javax.inject.Inject
 
 class MathOperationRepository @Inject constructor(private val localDataSource: LocalDataSource) {
 
-    fun addOperation(mathOperation: MathOperation) {
+    suspend fun addOperation(mathOperation: MathOperation) {
         localDataSource.addOperation(mathOperation)
     }
 
-    fun getHistory(): List<MathOperation> = localDataSource.getHistory()
+    suspend fun getHistory() = localDataSource.getHistory()
 
-    fun clear() {
+    suspend fun clear() {
         localDataSource.clear()
     }
 }

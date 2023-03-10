@@ -9,11 +9,11 @@ import com.oletob.rpncalc.data.model.entity.MathOperation
 interface MathOperationDao {
 
     @Insert
-    fun insert(operation: MathOperation)
+    suspend fun insert(operation: MathOperation)
 
     @Query("SELECT * FROM math_operation")
-    fun history(): List<MathOperation>
+    suspend fun history(): List<MathOperation>
 
     @Query("DELETE FROM math_operation")
-    fun clear()
+    suspend fun clear()
 }
