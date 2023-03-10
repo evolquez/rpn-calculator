@@ -38,6 +38,12 @@ class MainActivity: BaseActivity(), MainContract.View {
             binding.listViewPanel.adapter = it
         }
 
+        presenter.liveNumbers().observe(this) { numbers ->
+            numbers?.let { numberList ->
+                adapter.apply {  this.numbers = numberList }.also { it.notifyDataSetChanged() }
+            }
+        }
+
         initClickListeners()
     }
 
@@ -78,12 +84,6 @@ class MainActivity: BaseActivity(), MainContract.View {
             else -> return super.onOptionsItemSelected(item)
         }
         return true
-    }
-
-    override fun setNumbers(numbersList: MutableList<String>) {
-        adapter.apply {
-            numbers = numbersList
-        }.also { it.notifyDataSetChanged() }
     }
 
     private fun getNumberButtonList() = listOf(

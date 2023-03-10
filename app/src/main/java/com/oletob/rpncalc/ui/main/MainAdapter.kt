@@ -12,7 +12,7 @@ class MainAdapter(private val context: Context) : BaseAdapter() {
 
     private lateinit var binding: NumberItemBinding
 
-    var numbers: MutableList<String> = mutableListOf("0")
+    var numbers: List<String> = mutableListOf("0")
 
     override fun getCount() = numbers.size
 

@@ -1,6 +1,10 @@
 package com.oletob.rpncalc.ui.history
 
+import androidx.lifecycle.MutableLiveData
 import com.oletob.rpncalc.data.repository.MathOperationRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.launch
 
 class HistoryPresenter(
     private val view: HistoryContract.View,
@@ -9,19 +13,31 @@ class HistoryPresenter(
 
     private val historyItems = ArrayList<BaseItem>()
 
+    private val liveHistory: MutableLiveData<List<BaseItem>> by lazy {
+        MutableLiveData<List<BaseItem>>()
+    }
+
+    private val presenterScope = CoroutineScope(SupervisorJob())
+
+    override fun liveHistory() = liveHistory
+
     override fun init() {
+        presenterScope.launch {
+            historyItems.clear()
 
-        val history = mathOperationRepository.getHistory()
+            mathOperationRepository.getHistory().let {
+                if(it.isNotEmpty()) {
 
-        if(history.isNotEmpty()){
-            history.forEach {
-                historyItems.add(HistoryRowItem(it.statement, it.result))
+                    it.forEach { operation ->
+                        historyItems.add(HistoryRowItem(operation.statement, operation.result))
+                    }
+                }else {
+                    historyItems.add(EmptyRowItem())
+                }
+
+                liveHistory.postValue(historyItems)
             }
-        }else{
-            historyItems.add(EmptyRowItem())
         }
-
-        view.showHistory(historyItems)
     }
 
     override fun onClickClear() {
@@ -29,11 +45,10 @@ class HistoryPresenter(
     }
 
     override fun clearHistory() {
-        mathOperationRepository.clear()
-        historyItems.apply {
-            clear()
-            add(EmptyRowItem())
-        }.also {  view.showHistory(it) }
+        presenterScope.launch {
+            mathOperationRepository.clear()
+            init()
+        }
     }
     class HistoryRowItem(val expression: String, val result: Double): BaseItem(ItemType.HistoryItem)
     class EmptyRowItem: BaseItem(ItemType.EmptyItem)
