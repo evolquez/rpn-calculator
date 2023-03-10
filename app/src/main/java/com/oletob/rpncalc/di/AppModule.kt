@@ -14,9 +14,6 @@ class AppModule {
     @Singleton
     @Provides
     fun providesMathOperationDao(applicationContext: Context): MathOperationDao {
-        return Room
-            .databaseBuilder(applicationContext, AppDatabase::class.java, "rpn-db")
-            .allowMainThreadQueries()
-            .build().mathOperationDao()
+        return AppDatabase.create(applicationContext).mathOperationDao()
     }
 }

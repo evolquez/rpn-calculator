@@ -1,10 +1,11 @@
-# RPN Calculator (Reverse Polish Notation) - Android app
+# RPN Calculator (Reverse Polish Notation)  - Android 🤖
+
 
 This RPN Calculator app includes basic operations such as: 
-- Add
-- Subtract
-- Multiply
-- Divide 
+- Add ➕
+- Subtract ➖
+- Multiply ✖️
+- Divide ➗
 
 In addition you can see a history of all operations calculated by the app.
 
@@ -15,6 +16,8 @@ In addition you can see a history of all operations calculated by the app.
 
 ## Libraries
 - Dagger2 - Dependency injection
+- Room - Local persistence library
+- LiveData
 
 ## Architecture
 - [Android App Architecture]
@@ -24,10 +27,16 @@ In addition you can see a history of all operations calculated by the app.
 [RPN Calc on Google Play]
 
 ## Screenshots
+<table style="border:hidden;">
+<tr style="border: hidden">
+<td><img src="https://user-images.githubusercontent.com/8124733/224442570-068498df-614e-499f-87a4-37f0d325bcb3.png" width="250" /></td>
+<td><img src="https://user-images.githubusercontent.com/8124733/224442614-3bb36ea8-f04a-47c5-8744-437a0e6b6f9a.png" width="250" /></td>
+<td><img src="https://user-images.githubusercontent.com/8124733/224442656-729129f4-dbef-4b14-821d-f3eeb0ec3b1f.png" width="250"/></td>
+</tr>
+</table>
 
 
-<img src="https://user-images.githubusercontent.com/8124733/220457375-4d5ce817-b974-4199-8680-705291dd456c.png" width="300" />
-<img src="https://user-images.githubusercontent.com/8124733/220457379-9c1b6bb5-27b5-4db7-9d38-abe6105e7169.png" width="300" />
+
 
 [Android App Architecture]: <https://developer.android.com/topic/architecture>
 [RPN Calc on Google Play]: <https://play.google.com/store/apps/details?id=com.oletob.rpncalc>

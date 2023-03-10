@@ -1,6 +1,5 @@
 package com.oletob.rpncalc.ui.history
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -52,6 +51,16 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
             adapter = historyAdapter
         }
 
+        presenter.liveHistory().observe(this) {items ->
+            items?.let {
+                with(historyAdapter) {
+                    this.items = items
+                    notifyDataSetChanged()
+                }
+                binding.recyclerView.scrollToPosition(items.size - 1)
+            }
+        }
+
         setActionBar(R.string.history, true)
 
         presenter.init()
@@ -83,13 +92,6 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
             .show()
     }
 
-    @SuppressLint("NotifyDataSetChanged")
-    override fun showHistory(items: List<HistoryPresenter.BaseItem>) {
-        historyAdapter.items = items
-        historyAdapter.notifyDataSetChanged()
-        binding.recyclerView.scrollToPosition(items.size - 1)
-    }
-
     inner class HistoryAdapter: RecyclerView.Adapter<BaseViewHolder<in HistoryPresenter.BaseItem>>() {
 
         var items: List<HistoryPresenter.BaseItem> = emptyList()
@@ -108,10 +110,7 @@ class HistoryActivity: BaseActivity(), HistoryContract.View {
             } as BaseViewHolder<in HistoryPresenter.BaseItem>
         }
 
-        override fun onBindViewHolder(
-            holder: BaseViewHolder<in HistoryPresenter.BaseItem>,
-            position: Int
-        ) {
+        override fun onBindViewHolder(holder: BaseViewHolder<in HistoryPresenter.BaseItem>, position: Int) {
             holder.bind(items[position])
         }
 
