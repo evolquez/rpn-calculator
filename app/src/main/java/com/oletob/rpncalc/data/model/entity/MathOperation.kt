@@ -7,5 +7,5 @@ import androidx.room.PrimaryKey
 data class MathOperation(
     @PrimaryKey(autoGenerate = true) val id: Int,
     val statement: String,
-    val result: Double
+    val result: String
 )
