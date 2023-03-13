@@ -6,13 +6,14 @@ import com.oletob.rpncalc.ui.main.MainContract
 import com.oletob.rpncalc.ui.main.MainPresenter
 import dagger.Module
 import dagger.Provides
+import kotlinx.coroutines.CoroutineScope
 
 @Module
 class MainModule {
 
     @ActivityScope
     @Provides
-    fun presenter(view: MainContract.View, mathOperationRepository: MathOperationRepository): MainContract.Presenter {
-        return MainPresenter(view, mathOperationRepository)
+    fun presenter(view: MainContract.View, mathOperationRepository: MathOperationRepository, scope: CoroutineScope): MainContract.Presenter {
+        return MainPresenter(view, mathOperationRepository, scope)
     }
 }

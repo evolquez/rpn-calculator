@@ -3,12 +3,12 @@ package com.oletob.rpncalc.ui.history
 import androidx.lifecycle.MutableLiveData
 import com.oletob.rpncalc.data.repository.MathOperationRepository
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 
 class HistoryPresenter(
     private val view: HistoryContract.View,
-    private val mathOperationRepository: MathOperationRepository
+    private val mathOperationRepository: MathOperationRepository,
+    private val scope: CoroutineScope
 ): HistoryContract.Presenter {
 
     private val historyItems = ArrayList<BaseItem>()
@@ -17,12 +17,10 @@ class HistoryPresenter(
         MutableLiveData<List<BaseItem>>()
     }
 
-    private val presenterScope = CoroutineScope(SupervisorJob())
-
     override fun liveHistory() = liveHistory
 
     override fun init() {
-        presenterScope.launch {
+        scope.launch {
             historyItems.clear()
 
             mathOperationRepository.getHistory().let {
@@ -45,12 +43,12 @@ class HistoryPresenter(
     }
 
     override fun clearHistory() {
-        presenterScope.launch {
+        scope.launch {
             mathOperationRepository.clear()
             init()
         }
     }
-    class HistoryRowItem(val expression: String, val result: Double): BaseItem(ItemType.HistoryItem)
+    class HistoryRowItem(val expression: String, val result: String): BaseItem(ItemType.HistoryItem)
     class EmptyRowItem: BaseItem(ItemType.EmptyItem)
 
     enum class ItemType(val value: Int){

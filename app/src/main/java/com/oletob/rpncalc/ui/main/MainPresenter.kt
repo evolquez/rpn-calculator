@@ -5,16 +5,20 @@ import com.oletob.rpncalc.R
 import com.oletob.rpncalc.data.model.entity.MathOperation
 import com.oletob.rpncalc.data.repository.MathOperationRepository
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
+import java.text.NumberFormat
 
 class MainPresenter(
     private val view: MainContract.View,
-    private val mathOperationRepository: MathOperationRepository
+    private val mathOperationRepository: MathOperationRepository,
+    private val scope: CoroutineScope
 ): MainContract.Presenter {
 
+    private val numberFormat: NumberFormat by lazy {
+        NumberFormat.getInstance()
+    }
+
     private val numbers = mutableListOf("0")
-    private val presenterScope = CoroutineScope(SupervisorJob())
 
      private val liveNumbers: MutableLiveData<List<String>> by lazy {
         MutableLiveData<List<String>>()
@@ -84,11 +88,11 @@ class MainPresenter(
                 val statement: String = view
                     .getString(
                         R.string.math_operation_format,
-                        num2,
+                        numberFormat.format(num2),
                         view.getString(operator.symbol),
-                        num1)
-                presenterScope.launch {
-                    mathOperationRepository.addOperation(MathOperation(0, statement, result))
+                        numberFormat.format(num1))
+                scope.launch {
+                    mathOperationRepository.addOperation(MathOperation(0, statement, numberFormat.format(result)))
                     add(result.toString())
                     liveNumbers.postValue(this@with)
                 }

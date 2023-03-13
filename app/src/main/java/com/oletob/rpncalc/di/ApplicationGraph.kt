@@ -6,6 +6,7 @@ import com.oletob.rpncalc.ui.history.di.HistoryComponent
 import com.oletob.rpncalc.ui.main.di.MainComponent
 import dagger.BindsInstance
 import dagger.Component
+import kotlinx.coroutines.CoroutineScope
 import javax.inject.Singleton
 
 @Singleton
@@ -14,7 +15,7 @@ interface ApplicationGraph {
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance context: Context): ApplicationGraph
+        fun create(@BindsInstance context: Context, @BindsInstance scope: CoroutineScope): ApplicationGraph
     }
 
     fun mainComponent(): MainComponent.Factory
