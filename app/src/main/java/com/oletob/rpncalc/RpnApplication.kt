@@ -8,10 +8,12 @@ import kotlinx.coroutines.SupervisorJob
 
 open class RpnApplication: Application() {
 
-    val applicationScope = CoroutineScope(SupervisorJob())
-
     val appGraph: ApplicationGraph by lazy {
         initGraph()
     }
-    private fun initGraph(): ApplicationGraph = DaggerApplicationGraph.factory().create(applicationContext, applicationScope)
+    private fun initGraph(): ApplicationGraph {
+        val applicationScope = CoroutineScope(SupervisorJob())
+        return DaggerApplicationGraph.factory().create(applicationContext, applicationScope)
+    }
+
 }

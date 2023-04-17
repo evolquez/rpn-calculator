@@ -17,7 +17,7 @@ import com.oletob.rpncalc.RpnApplication
 import com.oletob.rpncalc.databinding.ActivityHistoryBinding
 import com.oletob.rpncalc.databinding.HistoryItemBinding
 import com.oletob.rpncalc.databinding.NoHistoryItemBinding
-import com.oletob.rpncalc.ui.base.BaseActivity
+import com.oletob.rpncalc.ui.common.BaseActivity
 import javax.inject.Inject
 
 class HistoryActivity: BaseActivity(), HistoryContract.View {
