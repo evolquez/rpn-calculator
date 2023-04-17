@@ -10,7 +10,7 @@ android {
         applicationId "com.oletob.rpncalc"
         minSdkVersion 24
         targetSdkVersion 33
-        versionCode 8
+        versionCode 9
         versionName "2.3"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
