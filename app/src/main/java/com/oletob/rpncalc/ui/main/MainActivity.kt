@@ -7,7 +7,7 @@ import com.oletob.rpncalc.R
 import com.oletob.rpncalc.RpnApplication
 import com.oletob.rpncalc.databinding.ActivityMainBinding
 import com.oletob.rpncalc.ui.about.AboutActivity
-import com.oletob.rpncalc.ui.base.BaseActivity
+import com.oletob.rpncalc.ui.common.BaseActivity
 import com.oletob.rpncalc.ui.history.HistoryActivity
 import javax.inject.Inject
 
@@ -49,6 +49,8 @@ class MainActivity: BaseActivity(), MainContract.View {
 
     private fun initClickListeners() {
 
+        val numberButtons = listOf(binding.button0, binding.button1, binding.button2, binding.button3, binding.button4, binding.button5, binding.button6, binding.button7, binding.button8, binding.button9)
+
         with(binding){
 
             // Buttons control
@@ -56,7 +58,7 @@ class MainActivity: BaseActivity(), MainContract.View {
             buttonEnter.setOnClickListener { presenter.onClickEnter() }
             buttonDelete.setOnClickListener { presenter.onClickDelete() }
 
-            getNumberButtonList().forEach { button ->
+            numberButtons.forEach { button ->
                 button.setOnClickListener { presenter.onClickNumber(button.text.toString()) }
             }
 
@@ -85,17 +87,4 @@ class MainActivity: BaseActivity(), MainContract.View {
         }
         return true
     }
-
-    private fun getNumberButtonList() = listOf(
-        binding.button0,
-        binding.button1,
-        binding.button2,
-        binding.button3,
-        binding.button4,
-        binding.button5,
-        binding.button6,
-        binding.button7,
-        binding.button8,
-        binding.button9
-    )
 }
