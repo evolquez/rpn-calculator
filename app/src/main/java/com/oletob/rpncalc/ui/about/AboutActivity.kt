@@ -9,7 +9,7 @@ import com.oletob.rpncalc.BuildConfig
 import com.oletob.rpncalc.R
 import com.oletob.rpncalc.RpnApplication
 import com.oletob.rpncalc.databinding.ActivityAboutBinding
-import com.oletob.rpncalc.ui.base.BaseActivity
+import com.oletob.rpncalc.ui.common.BaseActivity
 import javax.inject.Inject
 
 class AboutActivity: BaseActivity(), AboutContract.View {

@@ -1,7 +1,7 @@
 package com.oletob.rpncalc.ui.history
 
 import androidx.lifecycle.MutableLiveData
-import com.oletob.rpncalc.ui.base.BaseView
+import com.oletob.rpncalc.ui.common.BaseView
 
 interface HistoryContract {
 

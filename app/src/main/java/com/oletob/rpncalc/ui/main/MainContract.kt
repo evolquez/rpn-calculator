@@ -1,7 +1,7 @@
 package com.oletob.rpncalc.ui.main
 
 import androidx.lifecycle.LiveData
-import com.oletob.rpncalc.ui.base.BaseView
+import com.oletob.rpncalc.ui.common.BaseView
 
 interface MainContract {
 
