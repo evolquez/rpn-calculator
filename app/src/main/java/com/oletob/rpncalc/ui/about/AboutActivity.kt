@@ -4,6 +4,9 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.URLSpan
 import android.view.MenuItem
 import com.oletob.rpncalc.BuildConfig
 import com.oletob.rpncalc.R
@@ -36,7 +39,16 @@ class AboutActivity: BaseActivity(), AboutContract.View {
 
         presenter.init()
 
-        binding.imageViewGithub.setOnClickListener{presenter.onClickGithub()}
+        val githubLinkText = getString(R.string.author_github_profile)
+
+        binding.textViewGithub.apply {
+            text =  SpannableString(githubLinkText).apply {
+                setSpan(URLSpan(githubLinkText), 0, githubLinkText.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+            }
+            setOnClickListener {
+                presenter.onClickGithub()
+            }
+        }
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
