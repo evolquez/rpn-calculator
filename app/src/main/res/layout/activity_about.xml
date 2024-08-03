@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="30dp"
     tools:context=".ui.about.AboutActivity">
 
@@ -19,6 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:textAllCaps="true"
             android:text="@string/rpn_calculator"
             android:textSize="20sp"
             android:textStyle="bold" />
@@ -36,7 +37,7 @@
             android:id="@+id/text_view_description"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:lineSpacingExtra="10sp"
+            android:lineSpacingExtra="2sp"
             android:text="@string/app_description"
             android:textAlignment="center"
             android:layout_marginTop="45dp"/>
@@ -53,16 +54,17 @@
         android:paddingTop="15dp"
         android:paddingBottom="15dp">
 
-        <ImageView
-            android:id="@+id/image_view_github"
-            android:layout_height="42dp"
-            android:layout_width="42dp"
+        <TextView
+            android:id="@+id/text_view_github"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
-            android:padding="3dp"
-            android:contentDescription="@string/github"
-            android:src="@drawable/ic_github"
-            android:background="?selectableItemBackground"/>
+            android:drawablePadding="5dp"
+            android:textSize="13sp"
+            android:background="?selectableItemBackground"
+            android:text="@string/author_github_profile"
+            app:drawableTopCompat="@drawable/ic_github" />
 
         <TextView
             android:id="@+id/text_view_version"
@@ -70,7 +72,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:textSize="13sp"
-            tools:text="Version 1.0.0" />
+            tools:text="Version 2024.1.0" />
     </LinearLayout>
 
 </RelativeLayout>
