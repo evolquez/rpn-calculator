@@ -2,9 +2,9 @@
     <!--<string name="app_name">RPN Calc</string>-->
     <string name="zero">0</string>
     <string name="clear_btn">CLR</string>
-    <string name="clear">Clear</string>
+    <string name="clear_all">Clear All</string>
     <string name="delete">DEL</string>
-    <string name="enter">ENTR</string>
+    <string name="enter">ENTER</string>
     <string name="seven">7</string>
     <string name="four">4</string>
     <string name="one">1</string>
@@ -34,10 +34,24 @@
     <string name="rpn_calculator">RPN Calculator</string>
     <string name="reverse_polish_notation">Reverse Polish Notation</string>
     <string name="github">Github</string>
-    <string name="app_description">This RPN Calculator includes basic operations such as (add, subtract, multiply and divide) In addition you can see a history of all operations calculated by the app.</string>
     <string name="version_format">v%1$s (build %2$d)</string>
     <string name="new_line_char_plus_zero">\n0</string>
     <string name="new_line_char">\n</string>
     <string name="math_operation_format">%1$s %2$s %3$s</string>
     <string name="divide_by_zero_message">Can\'t divide by zero.</string>
+    <string name="current_entry_label">T:</string>
+    <string name="stack_position_format">%1$d:</string>
+    <string name="history_today">Today</string>
+    <string name="history_yesterday">Yesterday</string>
+    <string name="end_of_history">End of History</string>
+    <string name="about_engine_header">About the Engine</string>
+    <string name="engine_description_prefix">This high-performance RPN Calculator includes basic arithmetic operations such as </string>
+    <string name="engine_operations_highlight">add, subtract, multiply, and divide</string>
+    <string name="calculator_highlights_header">Calculators Highlights</string>
+    <string name="feature_history_title">Operations History</string>
+    <string name="feature_history_description">Seamlessly track, recall, and review every calculation step computed by the app stack.</string>
+    <string name="feature_postfix_title">Post-Fix Notation</string>
+    <string name="feature_postfix_description">Eliminate parenthesis ambiguity entirely using a pure developer-centric stack architecture.</string>
+    <string name="about_tagline">Designed for everyone</string>
+
 </resources>

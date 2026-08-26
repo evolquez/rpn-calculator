@@ -1,9 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#272822</color>
-    <color name="colorPrimaryDark">#272822</color>
-    <color name="colorAccent">#272822</color>
-    <color name="bgCalc">#272822</color>
-    <color name="buttonBg">#434343</color>
-    <color name="buttonBgControls">#636363</color>
+    <color name="colorBackground">#0D0E12</color>
+    <color name="colorAccent">#FF9F0A</color>
 </resources>
